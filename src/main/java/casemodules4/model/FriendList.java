@@ -1,5 +1,7 @@
 package casemodules4.model;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,9 +18,16 @@ public class FriendList {
     @ManyToOne
     private User userTo;
 
+    @Value("pending")
     private String status;
 
     public FriendList() {
+    }
+
+    public FriendList(User userFrom, User userTo, String status) {
+        this.userFrom = userFrom;
+        this.userTo = userTo;
+        this.status = status;
     }
 
     public FriendList(Long idFriendList, User userFrom, User userTo, String status) {

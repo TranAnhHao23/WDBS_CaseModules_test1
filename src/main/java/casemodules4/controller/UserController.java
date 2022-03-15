@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/users")
 public class UserController {
 
@@ -25,8 +26,8 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> showDetailUser(@PathVariable("id") Long id) {
+    @GetMapping("/{idUser}")
+    public ResponseEntity<User> showDetailUser(@PathVariable("idUser") Long id) {
         User user = userService.findById(id);
         if (user == null) {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -66,6 +67,7 @@ public class UserController {
         List<User> users = userService.findAllByFullNameContaining(nameSearch);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
+
 
 
 }
