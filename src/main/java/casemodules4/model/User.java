@@ -3,7 +3,6 @@ package casemodules4.model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "userList")
@@ -23,19 +22,21 @@ public class User {
     @OneToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
     @Transient
     private MultipartFile imgFile;
 
     public User() {
     }
 
-    public User(Long idUser, String phoneNumber, String fullName, String dateOfBirth, String address, String imgUrl, MultipartFile imgFile) {
+    public User(Long idUser, String phoneNumber, String fullName, String dateOfBirth, String address, String imgUrl, Account account, MultipartFile imgFile) {
         this.idUser = idUser;
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.imgUrl = imgUrl;
+        this.account = account;
         this.imgFile = imgFile;
     }
 

@@ -11,4 +11,6 @@ import java.util.List;
 @Transactional
 public interface IPostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByContentContaining(String hashtag);
+
+    List<Post> findAllByUserPostIdUser(Long id);
 }

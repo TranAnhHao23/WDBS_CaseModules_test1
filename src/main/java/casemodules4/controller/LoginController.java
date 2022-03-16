@@ -1,9 +1,6 @@
 package casemodules4.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -16,8 +13,8 @@ public class LoginController {
         return new ModelAndView("landing");
     }
 
-    @GetMapping("/1")
-    public ModelAndView newsfeed(){
-        return new ModelAndView("newsfeed");
-    }
+//    @PostMapping("/check")
+//    public ModelAndView newsfeedPost(){
+//        return new ModelAndView("newsfeed");
+//    }
 }
