@@ -1,15 +1,10 @@
 package casemodules4.controller;
 
 import casemodules4.model.Account;
-import casemodules4.model.Role;
-import casemodules4.model.User;
 import casemodules4.security.jwt.JwtProvider;
 import casemodules4.security.jwt.response.JwtResponse;
 import casemodules4.security.jwt.response.ResponseMessage;
-import casemodules4.security.service.UserPrinciple;
 import casemodules4.service.IAccountService;
-import casemodules4.service.IRoleService;
-import casemodules4.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @CrossOrigin("*")
