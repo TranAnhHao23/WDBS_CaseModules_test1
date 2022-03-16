@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,12 +7,12 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
 	<title>Winku Social Network Toolkit</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> 
+    <link rel="icon" href="../static/images/fav.png" type="image/png" sizes="16x16">
     
-    <link rel="stylesheet" href="css/main.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/color.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" th:href="@{/css/main.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/color.css}">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
 
 </head>
 <body>
@@ -25,7 +25,7 @@
 				<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
 			</span>
 			<span class="mh-text">
-				<a href="newsfeed.html" title=""><img src="images/logo2.png" alt=""></a>
+				<a href="newsfeed.html" title=""><img th:src= '@{/images/logo2.png}' alt=""></a>
 			</span>
 			<span class="mh-btns-right">
 				<a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -61,8 +61,8 @@
 						<li><a href="groups.html" title="">groups page</a></li>
 						<li><a href="page-likers.html" title="">Likes page</a></li>
 						<li><a href="people-nearby.html" title="">people nearby</a></li>
-						
-						
+
+
 					</ul>
 				</li>
 				<li><span>Account Setting</span>
@@ -145,27 +145,27 @@
 					<form method="post">
 						<div class="setting-row">
 							<span>use night mode</span>
-							<input type="checkbox" id="nightmode"/> 
+							<input type="checkbox" id="nightmode"/>
 							<label for="nightmode" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Notifications</span>
-							<input type="checkbox" id="switch2"/> 
+							<input type="checkbox" id="switch2"/>
 							<label for="switch2" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Notification sound</span>
-							<input type="checkbox" id="switch3"/> 
+							<input type="checkbox" id="switch3"/>
 							<label for="switch3" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>My profile</span>
-							<input type="checkbox" id="switch4"/> 
+							<input type="checkbox" id="switch4"/>
 							<label for="switch4" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Show profile</span>
-							<input type="checkbox" id="switch5"/> 
+							<input type="checkbox" id="switch5"/>
 							<label for="switch5" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 					</form>
@@ -173,32 +173,32 @@
 					<form method="post">
 						<div class="setting-row">
 							<span>Sub users</span>
-							<input type="checkbox" id="switch6" /> 
+							<input type="checkbox" id="switch6" />
 							<label for="switch6" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>personal account</span>
-							<input type="checkbox" id="switch7" /> 
+							<input type="checkbox" id="switch7" />
 							<label for="switch7" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Business account</span>
-							<input type="checkbox" id="switch8" /> 
+							<input type="checkbox" id="switch8" />
 							<label for="switch8" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Show me online</span>
-							<input type="checkbox" id="switch9" /> 
+							<input type="checkbox" id="switch9" />
 							<label for="switch9" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Delete history</span>
-							<input type="checkbox" id="switch10" /> 
+							<input type="checkbox" id="switch10" />
 							<label for="switch10" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 						<div class="setting-row">
 							<span>Expose author name</span>
-							<input type="checkbox" id="switch11" /> 
+							<input type="checkbox" id="switch11" />
 							<label for="switch11" data-on-label="ON" data-off-label="OFF"></label>
 						</div>
 					</form>
@@ -206,12 +206,12 @@
 			</div>
 		</nav>
 	</div><!-- responsive header -->
-	
+
 	<div class="topbar stick">
 		<div class="logo">
-			<a title="" href="newsfeed.html"><img src="images/logo.png" alt=""></a>
+			<a title="" href="newsfeed.html"><img src="../static/images/logo.png" alt=""></a>
 		</div>
-		
+
 		<div class="top-area">
 			<ul class="main-menu">
 				<li>
@@ -287,7 +287,7 @@
 						<ul class="drops-menu">
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-1.jpg" alt="">
+									<img src="../static/images/resources/thumb-1.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>sarah Loren</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -298,7 +298,7 @@
 							</li>
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-2.jpg" alt="">
+									<img src="../static/images/resources/thumb-2.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Jhon doe</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -309,7 +309,7 @@
 							</li>
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-3.jpg" alt="">
+									<img src="../static/images/resources/thumb-3.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Andrew</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -320,7 +320,7 @@
 							</li>
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-4.jpg" alt="">
+									<img src="../static/images/resources/thumb-4.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Tom cruse</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -331,7 +331,7 @@
 							</li>
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-5.jpg" alt="">
+									<img src="../static/images/resources/thumb-5.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Amy</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -351,7 +351,7 @@
 						<ul class="drops-menu">
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-1.jpg" alt="">
+									<img src="../static/images/resources/thumb-1.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>sarah Loren</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -362,7 +362,7 @@
 							</li>
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-2.jpg" alt="">
+									<img src="../static/images/resources/thumb-2.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Jhon doe</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -373,7 +373,7 @@
 							</li>
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-3.jpg" alt="">
+									<img src="../static/images/resources/thumb-3.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Andrew</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -384,7 +384,7 @@
 							</li>
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-4.jpg" alt="">
+									<img src="../static/images/resources/thumb-4.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Tom cruse</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -395,7 +395,7 @@
 							</li>
 							<li>
 								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-5.jpg" alt="">
+									<img src="../static/images/resources/thumb-5.jpg" alt="">
 									<div class="mesg-meta">
 										<h6>Amy</h6>
 										<span>Hi, how r u dear ...?</span>
@@ -418,7 +418,7 @@
 				</li>
 			</ul>
 			<div class="user-img">
-				<img src="images/resources/admin.jpg" alt="">
+				<img src="../static/images/resources/admin.jpg" alt="">
 				<span class="status f-online"></span>
 				<div class="user-setting">
 					<a href="#" title=""><span class="status f-online"></span>online</a>
@@ -434,7 +434,7 @@
 			<span class="ti-menu main-menu" data-ripple=""></span>
 		</div>
 	</div><!-- topbar -->
-		
+
 	<section>
 		<div class="gap gray-bg">
 			<div class="container-fluid">
@@ -521,35 +521,35 @@
 										<h4 class="widget-title">Who's follownig</h4>
 										<ul class="followers">
 											<li>
-												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
+												<figure><img src="../static/images/resources/friend-avatar2.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="time-line.html" title="">Kelly Bill</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
-												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
+												<figure><img src="../static/images/resources/friend-avatar4.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="time-line.html" title="">Issabel</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
-												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
+												<figure><img src="../static/images/resources/friend-avatar6.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="time-line.html" title="">Andrew</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
-												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
+												<figure><img src="../static/images/resources/friend-avatar8.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="time-line.html" title="">Sophia</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
-												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
+												<figure><img src="../static/images/resources/friend-avatar3.jpg" alt=""></figure>
 												<div class="friend-meta">
 													<h4><a href="time-line.html" title="">Allen</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
@@ -563,7 +563,7 @@
 								<div class="central-meta">
 									<div class="new-postbox">
 										<figure>
-											<img src="images/resources/admin2.jpg" alt="">
+											<img src="../static/images/resources/admin2.jpg" alt="">
 										</figure>
 										<div class="newpst-input">
 											<form method="post">
@@ -608,14 +608,14 @@
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img src="images/resources/friend-avatar10.jpg" alt="">
+												<img src="../static/images/resources/friend-avatar10.jpg" alt="">
 											</figure>
 											<div class="friend-name">
 												<ins><a href="time-line.html" title="">Janice Griffith</a></ins>
 												<span>published: june,2 2018 19:PM</span>
 											</div>
 											<div class="post-meta">
-												<img src="images/resources/user-post.jpg" alt="">
+												<img src="../static/images/resources/user-post.jpg" alt="">
 												<div class="we-video-info">
 													<ul>
 														<li>
@@ -678,7 +678,7 @@
 													</ul>
 												</div>
 												<div class="description">
-													
+
 													<p>
 														World's most beautiful car in Curabitur <a href="#" title="">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
 													</p>
@@ -689,7 +689,7 @@
 											<ul class="we-comet">
 												<li>
 													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+														<img src="../static/images/resources/comet-1.jpg" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
@@ -702,7 +702,7 @@
 													<ul>
 														<li>
 															<div class="comet-avatar">
-																<img src="images/resources/comet-2.jpg" alt="">
+																<img src="../static/images/resources/comet-2.jpg" alt="">
 															</div>
 															<div class="we-comment">
 																<div class="coment-head">
@@ -715,7 +715,7 @@
 														</li>
 														<li>
 															<div class="comet-avatar">
-																<img src="images/resources/comet-3.jpg" alt="">
+																<img src="../static/images/resources/comet-3.jpg" alt="">
 															</div>
 															<div class="we-comment">
 																<div class="coment-head">
@@ -730,7 +730,7 @@
 												</li>
 												<li>
 													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+														<img src="../static/images/resources/comet-1.jpg" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
@@ -748,7 +748,7 @@
 												</li>
 												<li class="post-comment">
 													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+														<img src="../static/images/resources/comet-1.jpg" alt="">
 													</div>
 													<div class="post-comt-box">
 														<form method="post">
@@ -771,7 +771,7 @@
 																<i class="em em-stuck_out_tongue"></i>
 															</div>
 															<button type="submit"></button>
-														</form>	
+														</form>
 													</div>
 												</li>
 											</ul>
@@ -782,7 +782,7 @@
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img src="images/resources/nearly1.jpg" alt="">
+												<img src="../static/images/resources/nearly1.jpg" alt="">
 											</figure>
 											<div class="friend-name">
 												<ins><a href="time-line.html" title="">Sara Grey</a></ins>
@@ -852,7 +852,7 @@
 													</ul>
 												</div>
 												<div class="description">
-													
+
 													<p>
 														Lonely Cat Enjoying in Summer Curabitur <a href="#" title="">#mypage</a> ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
 													</p>
@@ -863,7 +863,7 @@
 											<ul class="we-comet">
 												<li>
 													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+														<img src="../static/images/resources/comet-1.jpg" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
@@ -877,7 +877,7 @@
 												</li>
 												<li>
 													<div class="comet-avatar">
-														<img src="images/resources/comet-2.jpg" alt="">
+														<img src="../static/images/resources/comet-2.jpg" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
@@ -895,7 +895,7 @@
 												</li>
 												<li class="post-comment">
 													<div class="comet-avatar">
-														<img src="images/resources/comet-2.jpg" alt="">
+														<img src="../static/images/resources/comet-2.jpg" alt="">
 													</div>
 													<div class="post-comt-box">
 														<form method="post">
@@ -918,7 +918,7 @@
 																<i class="em em-stuck_out_tongue"></i>
 															</div>
 															<button type="submit"></button>
-														</form>	
+														</form>
 													</div>
 												</li>
 											</ul>
@@ -929,7 +929,7 @@
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img src="images/resources/nearly6.jpg" alt="">
+												<img src="../static/images/resources/nearly6.jpg" alt="">
 											</figure>
 											<div class="friend-name">
 												<ins><a href="time-line.html" title="">Sophia</a></ins>
@@ -1003,7 +1003,7 @@
 													</ul>
 												</div>
 												<div class="description">
-													
+
 													<p>
 														Curabitur Lonely Cat Enjoying in Summer <a href="#" title="">#mypage</a> ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
 													</p>
@@ -1014,7 +1014,7 @@
 											<ul class="we-comet">
 												<li>
 													<div class="comet-avatar">
-														<img src="images/resources/comet-1.jpg" alt="">
+														<img src="../static/images/resources/comet-1.jpg" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
@@ -1028,7 +1028,7 @@
 												</li>
 												<li>
 													<div class="comet-avatar">
-														<img src="images/resources/comet-2.jpg" alt="">
+														<img src="../static/images/resources/comet-2.jpg" alt="">
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
@@ -1046,7 +1046,7 @@
 												</li>
 												<li class="post-comment">
 													<div class="comet-avatar">
-														<img src="images/resources/comet-2.jpg" alt="">
+														<img src="../static/images/resources/comet-2.jpg" alt="">
 													</div>
 													<div class="post-comt-box">
 														<form method="post">
@@ -1069,7 +1069,7 @@
 																<i class="em em-stuck_out_tongue"></i>
 															</div>
 															<button type="submit"></button>
-														</form>	
+														</form>
 													</div>
 												</li>
 											</ul>
@@ -1080,27 +1080,27 @@
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
-												<img alt="" src="images/resources/friend-avatar10.jpg">
+												<img alt="" src="../static/images/resources/friend-avatar10.jpg">
 											</figure>
 											<div class="friend-name">
 												<ins><a title="" href="time-line.html">Janice Griffith</a></ins>
 												<span>published: june,2 2018 19:PM</span>
 											</div>
 											<div class="description">
-													
+
 													<p>
 														Curabitur World's most beautiful car in <a title="" href="#">#test drive booking !</a> the most beatuiful car available in america and the saudia arabia, you can book your test drive by our official website
 													</p>
 												</div>
 											<div class="post-meta">
 												<div class="linked-image align-left">
-													<a title="" href="#"><img alt="" src="images/resources/page1.jpg"></a>
+													<a title="" href="#"><img alt="" src="../static/images/resources/page1.jpg"></a>
 												</div>
 												<div class="detail">
 													<span>Love Maid - ChillGroves</span>
 													<p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua... </p>
 													<a title="" href="#">www.sample.com</a>
-												</div>		
+												</div>
 												<div class="we-video-info">
 													<ul>
 														<li>
@@ -1171,10 +1171,10 @@
 							<div class="col-lg-3">
 								<aside class="sidebar static">
 									<div class="widget">
-										<h4 class="widget-title">Your page</h4>	
+										<h4 class="widget-title">Your page</h4>
 										<div class="your-page">
 											<figure>
-												<a href="#" title=""><img src="images/resources/friend-avatar9.jpg" alt=""></a>
+												<a href="#" title=""><img src="../static/images/resources/friend-avatar9.jpg" alt=""></a>
 											</figure>
 											<div class="page-meta">
 												<a href="#" title="" class="underline">My page</a>
@@ -1193,26 +1193,26 @@
 													  <a href="#" title="weekly-likes">35 new likes this week</a>
 													  <div class="users-thumb-list">
 														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="images/resources/userlist-1.jpg" alt="">  
+															<img src="../static/images/resources/userlist-1.jpg" alt="">
 														</a>
 														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="images/resources/userlist-2.jpg" alt="">  
+															<img src="../static/images/resources/userlist-2.jpg" alt="">
 														</a>
 														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="images/resources/userlist-3.jpg" alt="">  
+															<img src="../static/images/resources/userlist-3.jpg" alt="">
 														</a>
 														<a href="#" title="Amy" data-toggle="tooltip">
-															<img src="images/resources/userlist-4.jpg" alt="">  
+															<img src="../static/images/resources/userlist-4.jpg" alt="">
 														</a>
 														<a href="#" title="Ema" data-toggle="tooltip">
-															<img src="images/resources/userlist-5.jpg" alt="">  
+															<img src="../static/images/resources/userlist-5.jpg" alt="">
 														</a>
 														<a href="#" title="Sophie" data-toggle="tooltip">
-															<img src="images/resources/userlist-6.jpg" alt="">  
+															<img src="../static/images/resources/userlist-6.jpg" alt="">
 														</a>
 														<a href="#" title="Maria" data-toggle="tooltip">
-															<img src="images/resources/userlist-7.jpg" alt="">  
-														</a>  
+															<img src="../static/images/resources/userlist-7.jpg" alt="">
+														</a>
 													  </div>
 												  </div>
 												  <div class="tab-pane fade" id="link2" >
@@ -1220,26 +1220,26 @@
 													  <a href="#" title="weekly-likes">440 new views this week</a>
 													  <div class="users-thumb-list">
 														<a href="#" title="Anderw" data-toggle="tooltip">
-															<img src="images/resources/userlist-1.jpg" alt="">  
+															<img src="../static/images/resources/userlist-1.jpg" alt="">
 														</a>
 														<a href="#" title="frank" data-toggle="tooltip">
-															<img src="images/resources/userlist-2.jpg" alt="">  
+															<img src="../static/images/resources/userlist-2.jpg" alt="">
 														</a>
 														<a href="#" title="Sara" data-toggle="tooltip">
-															<img src="images/resources/userlist-3.jpg" alt="">  
+															<img src="../static/images/resources/userlist-3.jpg" alt="">
 														</a>
 														<a href="#" title="Amy" data-toggle="tooltip">
-															<img src="images/resources/userlist-4.jpg" alt="">  
+															<img src="../static/images/resources/userlist-4.jpg" alt="">
 														</a>
 														<a href="#" title="Ema" data-toggle="tooltip">
-															<img src="images/resources/userlist-5.jpg" alt="">  
+															<img src="../static/images/resources/userlist-5.jpg" alt="">
 														</a>
 														<a href="#" title="Sophie" data-toggle="tooltip">
-															<img src="images/resources/userlist-6.jpg" alt="">  
+															<img src="../static/images/resources/userlist-6.jpg" alt="">
 														</a>
 														<a href="#" title="Maria" data-toggle="tooltip">
-															<img src="images/resources/userlist-7.jpg" alt="">  
-														</a>  
+															<img src="../static/images/resources/userlist-7.jpg" alt="">
+														</a>
 													  </div>
 												  </div>
 												</div>
@@ -1248,9 +1248,9 @@
 									</div><!-- page like widget -->
 									<div class="widget">
 										<div class="banner medium-opacity bluesh">
-											<div class="bg-image" style="background-image: url(images/resources/baner-widgetbg.jpg)"></div>
+											<div class="bg-image" style="background-image: url(../static/images/resources/baner-widgetbg.jpg)"></div>
 											<div class="baner-top">
-												<span><img alt="" src="images/book-icon.png"></span>
+												<span><img alt="" src="../static/images/book-icon.png"></span>
 												<i class="fa fa-ellipsis-h"></i>
 											</div>
 											<div class="banermeta">
@@ -1260,7 +1260,7 @@
 												<span>like them all</span>
 												<a data-ripple="" title="" href="#">start now!</a>
 											</div>
-										</div>											
+										</div>
 									</div>
 									<div class="widget friend-list stick-widget">
 										<h4 class="widget-title">Friends</h4>
@@ -1268,7 +1268,7 @@
 										<ul id="people-list" class="friendz-list">
 											<li>
 												<figure>
-													<img src="images/resources/friend-avatar.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar.jpg" alt="">
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1278,7 +1278,7 @@
 											</li>
 											<li>
 												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar2.jpg" alt="">
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1288,7 +1288,7 @@
 											</li>
 											<li>
 												<figure>
-													<img src="images/resources/friend-avatar3.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar3.jpg" alt="">
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1298,7 +1298,7 @@
 											</li>
 											<li>
 												<figure>
-													<img src="images/resources/friend-avatar4.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar4.jpg" alt="">
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1307,9 +1307,9 @@
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar5.jpg" alt="">
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1318,9 +1318,9 @@
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
-													<img src="images/resources/friend-avatar6.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar6.jpg" alt="">
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1329,9 +1329,9 @@
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
-													<img src="images/resources/friend-avatar7.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar7.jpg" alt="">
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1340,9 +1340,9 @@
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar5.jpg" alt="">
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1351,9 +1351,9 @@
 												</div>
 											</li>
 											<li>
-												
+
 												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
+													<img src="../static/images/resources/friend-avatar2.jpg" alt="">
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
@@ -1374,7 +1374,7 @@
 											<div class="chat-list">
 												<ul>
 													<li class="me">
-														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+														<div class="chat-thumb"><img src="../static/images/resources/chatlist1.jpg" alt=""></div>
 														<div class="notification-event">
 															<span class="chat-message-item">
 																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
@@ -1383,7 +1383,7 @@
 														</div>
 													</li>
 													<li class="you">
-														<div class="chat-thumb"><img src="images/resources/chatlist2.jpg" alt=""></div>
+														<div class="chat-thumb"><img src="../static/images/resources/chatlist2.jpg" alt=""></div>
 														<div class="notification-event">
 															<span class="chat-message-item">
 																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
@@ -1392,7 +1392,7 @@
 														</div>
 													</li>
 													<li class="me">
-														<div class="chat-thumb"><img src="images/resources/chatlist1.jpg" alt=""></div>
+														<div class="chat-thumb"><img src="../static/images/resources/chatlist1.jpg" alt=""></div>
 														<div class="notification-event">
 															<span class="chat-message-item">
 																Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling the gifts and Jake’s gonna get the drinks
@@ -1427,11 +1427,11 @@
 									</div><!-- friends list sidebar -->
 								</aside>
 							</div><!-- sidebar -->
-						</div>	
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	</section>
 
 	<footer>
@@ -1441,8 +1441,8 @@
 					<div class="widget">
 						<div class="foot-logo">
 							<div class="logo">
-								<a href="index-2.html" title=""><img src="images/logo.png" alt=""></a>
-							</div>	
+								<a href="index-2.html" title=""><img src="../static/images/logo.png" alt=""></a>
+							</div>
 							<p>
 								The trio took this simple idea and built it into the world’s leading carpooling platform.
 							</p>
@@ -1513,7 +1513,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<span class="copyright"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
-					<i><img src="images/credit-cards.png" alt=""></i>
+					<i><img src="../static/images/credit-cards.png" alt=""></i>
 				</div>
 			</div>
 		</div>
@@ -1524,27 +1524,27 @@
 			<form method="post">
 				<div class="setting-row">
 					<span>use night mode</span>
-					<input type="checkbox" id="nightmode1"/> 
+					<input type="checkbox" id="nightmode1"/>
 					<label for="nightmode1" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Notifications</span>
-					<input type="checkbox" id="switch22" /> 
+					<input type="checkbox" id="switch22" />
 					<label for="switch22" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Notification sound</span>
-					<input type="checkbox" id="switch33" /> 
+					<input type="checkbox" id="switch33" />
 					<label for="switch33" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>My profile</span>
-					<input type="checkbox" id="switch44" /> 
+					<input type="checkbox" id="switch44" />
 					<label for="switch44" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Show profile</span>
-					<input type="checkbox" id="switch55" /> 
+					<input type="checkbox" id="switch55" />
 					<label for="switch55" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 			</form>
@@ -1552,40 +1552,40 @@
 			<form method="post">
 				<div class="setting-row">
 					<span>Sub users</span>
-					<input type="checkbox" id="switch66" /> 
+					<input type="checkbox" id="switch66" />
 					<label for="switch66" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>personal account</span>
-					<input type="checkbox" id="switch77" /> 
+					<input type="checkbox" id="switch77" />
 					<label for="switch77" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Business account</span>
-					<input type="checkbox" id="switch88" /> 
+					<input type="checkbox" id="switch88" />
 					<label for="switch88" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Show me online</span>
-					<input type="checkbox" id="switch99" /> 
+					<input type="checkbox" id="switch99" />
 					<label for="switch99" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Delete history</span>
-					<input type="checkbox" id="switch101" /> 
+					<input type="checkbox" id="switch101" />
 					<label for="switch101" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 				<div class="setting-row">
 					<span>Expose author name</span>
-					<input type="checkbox" id="switch111" /> 
+					<input type="checkbox" id="switch111" />
 					<label for="switch111" data-on-label="ON" data-off-label="OFF"></label>
 				</div>
 			</form>
-		</div><!-- side panel -->		
+		</div><!-- side panel -->
 	
-	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js"></script>
-	<script src="js/script.js"></script>
-	<script src="js/map-init.js"></script>
+	<script data-cfasync="false" th:src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../static/js/main.min.js"></script>
+	<script th:src="../static/js/script.js"></script>
+	<script th:src="../static/js/map-init.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8c55_YHLvDHGACkQscgbGLtLRdxBDCfI"></script>
 
 </body>	
