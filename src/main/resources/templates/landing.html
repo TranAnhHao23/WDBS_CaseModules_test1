@@ -40,13 +40,13 @@
 							<p>
 								Don’t use Winku Yet? <a th:href="@{#}" title="">Take the tour</a> or <a th:href="@{#}" title="">Join now</a>
 							</p>
-						<form method="post">
+						<form method="post" th:action="@{/login/check}">
 							<div class="form-group">	
-							  <input type="text" id="input" required="required"/>
+							  <input type="text" id="input" name="userName" required="required"/>
 							  <label class="control-label" for="input">Username</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="password" required="required"/>
+							  <input type="password" name="password" required="required"/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
 							</div>
 							<div class="checkbox">

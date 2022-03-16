@@ -16,6 +16,9 @@ public class LoginController {
         return new ModelAndView("landing");
     }
 
+//    @GetMapping("/check")
+//    public ModelAndView checkLogin()
+
     @GetMapping("/1")
     public ModelAndView newsfeed(){
         return new ModelAndView("newsfeed");
