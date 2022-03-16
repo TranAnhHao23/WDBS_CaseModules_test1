@@ -35,4 +35,14 @@ public class AccountService implements IAccountService {
     public Boolean existsByEmail(String name) {
         return accountRepository.existsByEmail(name);
     }
+
+    @Override
+    public boolean checkLogin(Account account) {
+        for (Account acc : accountRepository.findAll()) {
+            if(acc.getEmail().equals(account.getEmail()) && acc.getPassword().equals(acc.getPassword())){
+                return true;
+            }
+        }
+        return false;
+    }
 }

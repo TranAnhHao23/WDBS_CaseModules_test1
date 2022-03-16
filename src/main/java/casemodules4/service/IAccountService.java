@@ -11,4 +11,7 @@ public interface IAccountService {
 
     Boolean existsByUsername(String name);
     Boolean existsByEmail(String name);
+
+    boolean checkLogin(Account account);
+
 }
