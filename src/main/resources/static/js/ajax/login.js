@@ -13,12 +13,13 @@ function login() {
             'Content-Type': 'application/json'
         },
         data: JSON.stringify(userInfo),
-        success: function () {
+        success: function (data) {
             console.log("hello anh em")
-            window.location.href = "newsfeed.html"
+            console.log(data)
+            window.open("newsfeed.html", "_blank")
         },
         error: function (){
-            window.open("about.html");
+            window.location.href = "404-2.html"
         }
     })
 }

@@ -48,7 +48,11 @@ public class AuthController {
         String token = jwtProvider.createToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Account currentUser = accountService.findByUsername(account.getUsername()).get();
-        return ResponseEntity.ok(new JwtResponse(currentUser.getId(), token, userDetails.getUsername(), userDetails.getAuthorities(), new ResponseMessage("Login Success!")));
+        if (accountService.checkLogin(currentUser)){
+            return ResponseEntity.ok(new JwtResponse(currentUser.getId(), token, userDetails.getUsername(), userDetails.getAuthorities(), new ResponseMessage("Login Success!")));
+        } else {
+            return new ResponseEntity<>(new ResponseMessage("account not found or wrong information"), HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/user")
