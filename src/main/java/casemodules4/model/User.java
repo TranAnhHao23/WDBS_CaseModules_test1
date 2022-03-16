@@ -3,6 +3,7 @@ package casemodules4.model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "userList")
@@ -10,31 +11,26 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
-
-    private String email;
-
-    private String token;
-
     private String phoneNumber;
 
     private String fullName;
 
     private String dateOfBirth;
-
     private String address;
 
     private String imgUrl;
 
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
     @Transient
     private MultipartFile imgFile;
 
     public User() {
     }
 
-    public User(Long idUser, String email, String token, String phoneNumber, String fullName, String dateOfBirth, String address, String imgUrl, MultipartFile imgFile) {
+    public User(Long idUser, String phoneNumber, String fullName, String dateOfBirth, String address, String imgUrl, MultipartFile imgFile) {
         this.idUser = idUser;
-        this.email = email;
-        this.token = token;
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.dateOfBirth = dateOfBirth;
@@ -49,22 +45,6 @@ public class User {
 
     public void setIdUser(Long idUser) {
         this.idUser = idUser;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getPhoneNumber() {
