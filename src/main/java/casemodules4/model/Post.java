@@ -3,6 +3,7 @@ package casemodules4.model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -16,8 +17,11 @@ public class Post {
 
     private String imgUrl;
 
-    @Transient
-    private MultipartFile imgFile;
+    private LocalDate createdDate;
+
+    private String imgFile;
+//    @Transient
+//    private MultipartFile imgFile;
 
     @ManyToOne
     private User userPost;
@@ -32,10 +36,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(Long idPost, String content, String imgUrl, MultipartFile imgFile, User userPost, Set<Comment> comments, Set<Group> groups) {
+    public Post(Long idPost, String content, String imgUrl, LocalDate createdDate, String imgFile, User userPost, Set<Comment> comments, Set<Group> groups) {
         this.idPost = idPost;
         this.content = content;
         this.imgUrl = imgUrl;
+        this.createdDate = createdDate;
         this.imgFile = imgFile;
         this.userPost = userPost;
         this.comments = comments;
@@ -66,11 +71,11 @@ public class Post {
         this.imgUrl = imgUrl;
     }
 
-    public MultipartFile getImgFile() {
+    public String getImgFile() {
         return imgFile;
     }
 
-    public void setImgFile(MultipartFile imgFile) {
+    public void setImgFile(String imgFile) {
         this.imgFile = imgFile;
     }
 
@@ -96,5 +101,13 @@ public class Post {
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements IPostService {
@@ -20,11 +21,8 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public Post findById(Long id) {
-        if (postRepository.findById(id).isPresent()){
-            return postRepository.findById(id).get();
-        }
-        return null;
+    public Optional<Post> findById(Long id) {
+            return postRepository.findById(id);
     }
 
     @Override
