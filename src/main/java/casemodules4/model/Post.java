@@ -14,6 +14,8 @@ public class Post {
 
     private String content;
 
+    private String status;
+
     private String imgUrl;
 
     @Transient
@@ -32,14 +34,23 @@ public class Post {
     public Post() {
     }
 
-    public Post(Long idPost, String content, String imgUrl, MultipartFile imgFile, User userPost, Set<Comment> comments, Set<Group> groups) {
+    public Post(Long idPost, String content, String status, String imgUrl, MultipartFile imgFile, User userPost, Set<Comment> comments, Set<Group> groups) {
         this.idPost = idPost;
         this.content = content;
+        this.status = status;
         this.imgUrl = imgUrl;
         this.imgFile = imgFile;
         this.userPost = userPost;
         this.comments = comments;
         this.groups = groups;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getIdPost() {
