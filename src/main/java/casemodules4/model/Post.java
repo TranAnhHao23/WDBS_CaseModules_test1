@@ -3,6 +3,7 @@ package casemodules4.model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -96,5 +97,14 @@ public class Post {
 
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
+    }
+
+    public void setDateCreated(LocalDate now) {
+    }
+
+    public void setGroup(Set<Group> groups) {
+    }
+
+    public void setUser(User byId) {
     }
 }

@@ -21,7 +21,7 @@ public class GroupMembers {
 
     private String role;
 
-    public GroupMembers() {
+    public GroupMembers(int i, User user, Group group) {
     }
 
     public GroupMembers(EmbeddedGroupMembers id, Group group, User user, String role) {
@@ -31,7 +31,7 @@ public class GroupMembers {
         this.role = role;
     }
 
-    public EmbeddedGroupMembers getId() {
+    public Long getId() {
         return id;
     }
 
@@ -61,5 +61,8 @@ public class GroupMembers {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setStatus(int i) {
     }
 }
