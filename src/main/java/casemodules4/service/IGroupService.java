@@ -1,4 +1,7 @@
 package casemodules4.service;
 
-public interface IGroupService {
+import casemodules4.model.Group;
+
+public interface IGroupService extends IGeneralService<Group> {
+    Iterable<Group> findAllByName(String name);
 }
