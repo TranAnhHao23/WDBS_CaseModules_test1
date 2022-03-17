@@ -36,6 +36,6 @@ public class GroupMembersServiceImpl implements IGroupMembersService {
 
     @Override
     public Optional<GroupMembers> findByIdGroupAndIdUser(Long idGroup, Long idUser) {
-        return iGroupMembersRepository.findByGroup_IdGroupAndUserIdUser(idGroup,idUser);
+        return iGroupMembersRepository.findByGroup_IdGroupAndUser_IdUser(idGroup,idUser);
     }
 }

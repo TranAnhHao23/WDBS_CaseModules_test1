@@ -49,7 +49,7 @@ public class GroupMembersController {
     public ResponseEntity<GroupMembers> joinGroup(@PathVariable("idUser") Long idUser,
                                                  @PathVariable("idGroup") Long idGroup) {
         Optional<GroupMembers> groupMembers = groupMembersService.findByIdGroupAndIdUser(idGroup, idUser);
-        groupMembers.get().setStatus(1);
+        groupMembers.get().setRole("user");
         groupMembersService.save(groupMembers.get());
         return new ResponseEntity<>(groupMembers.get(), HttpStatus.OK);
     }

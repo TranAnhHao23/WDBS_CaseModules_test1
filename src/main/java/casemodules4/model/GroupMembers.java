@@ -67,6 +67,4 @@ public class GroupMembers {
         this.role = role;
     }
 
-    public void setStatus(int i) {
-    }
 }
