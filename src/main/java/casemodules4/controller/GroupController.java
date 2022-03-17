@@ -23,11 +23,11 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
 
-@Controller
+@RestController
 @CrossOrigin("*")
 @RequestMapping("/group")
 public class GroupController {
-    @Value("${file-upload}")
+    @Value("${upload.path}")
     private String fileUpload;
 
     @Value("${view}")
@@ -88,14 +88,13 @@ public class GroupController {
         post.setGroup((Set<Group>) groupService.findById(idGroup).get());
         post.setUser(userService.findById(idUser));
         Post postCreate = postService.save(post);
-        // asdhajksdasjkd
         return new ResponseEntity<>(postCreate, HttpStatus.CREATED);
     }
 
     //search group
-    @GetMapping("/search-group")
-    public ResponseEntity<Iterable<Group>> findAllByName(@RequestParam Optional<String> search) {
-        Iterable<Group> groupsList = groupService.findAllByName(search.get());
+    @GetMapping("/search-group/{search}")
+    public ResponseEntity<Iterable<Group>> findAllByName(@PathVariable String search) {
+        Iterable<Group> groupsList = groupService.findAllByName(search);
         if (!groupsList.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

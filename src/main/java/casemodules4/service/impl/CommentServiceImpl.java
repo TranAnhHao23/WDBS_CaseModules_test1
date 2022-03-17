@@ -14,8 +14,8 @@ public class CommentServiceImpl implements ICommentService {
     @Autowired
     private ICommentRepository iCommentRepository;
 
-    @Autowired
-    private ILikeCommentService iLikeCommentService;
+//    @Autowired
+//    private ILikeCommentService iLikeCommentService;
 
     @Override
     public Iterable<Comment> findAll() {
@@ -34,17 +34,22 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     public void remove(Long id) {
-        iLikeCommentService.deleteAllByIdComment(id);
-        iCommentRepository.deleteById(id);
+
     }
+
+//    @Override
+//    public void remove(Long id) {
+//        iLikeCommentService.deleteAllByIdComment(id);
+//        iCommentRepository.deleteById(id);
+//    }
 
     @Override
     public Iterable<Comment> findAllByIdPost(Long id) {
-        return iCommentRepository.findAllByIdPost(id);
+        return null;
     }
 
     @Override
     public Iterable<Comment> deleteAllByIdComment(Long id) {
-        return iCommentRepository.deleteAllByIdComment();
+        return iCommentRepository.deleteAllByIdComment(id);
     }
 }
