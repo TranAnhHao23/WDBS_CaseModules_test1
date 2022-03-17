@@ -9,9 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface ICommentRepository extends JpaRepository<Comment, Long> {
-    Iterable<Comment> findAllById_Post(Long id);
+    Iterable<Comment> findAllByIdPost(Long id);
 
     void deleteAllByPost(Post post);
 
-    Iterable<Comment> deleteAllById_Comment();
+    Iterable<Comment> deleteAllByIdComment();
+
 }

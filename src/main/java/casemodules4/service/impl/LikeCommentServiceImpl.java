@@ -19,8 +19,8 @@ public class LikeCommentServiceImpl implements ILikeCommentService {
     }
 
     @Override
-    public Optional<LikeComment> findById_CommentAndId_User(Long id_comment, Long id_user) {
-        return iLikeCommentRepository.findById_CommentAndId_User(id_comment, id_user);
+    public Optional<LikeComment> findByIdCommentAndIdUser(Long idComment, Long idUser) {
+        return iLikeCommentRepository.findByIdCommentAndIdUser(idComment, idUser);
     }
 
     @Override
@@ -34,13 +34,13 @@ public class LikeCommentServiceImpl implements ILikeCommentService {
     }
 
     @Override
-    public Long countLikeCommentById_Comment(Long id_post) {
-        return iLikeCommentRepository.countLikeCommentById_Comment(id_post);
+    public Long countLikeCommentByIdComment(Long idPost) {
+        return iLikeCommentRepository.countLikeCommentByIdComment(idPost);
     }
 
     @Override
-    public void deleteAllById_Comment(Long id_post) {
-        iLikeCommentRepository.deleteAllById_Comment(id_post);
+    public void deleteAllByIdComment(Long idPost) {
+        iLikeCommentRepository.deleteAllByIdComment(idPost);
     }
 
     @Override

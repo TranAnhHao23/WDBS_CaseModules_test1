@@ -20,7 +20,7 @@ public class CommentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Iterable<Comment>> showAllByPost(@PathVariable("id") Long id) {
-        Iterable<Comment> comments = commentService.findAllById_Post(id);
+        Iterable<Comment> comments = commentService.findAllByIdPost(id);
 
         if (!comments.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

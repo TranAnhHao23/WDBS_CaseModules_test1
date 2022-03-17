@@ -5,9 +5,9 @@ import casemodules4.model.LikeComment;
 import java.util.Optional;
 
 public interface ILikeCommentService extends IGeneralService<LikeComment> {
-    Optional<LikeComment> findById_CommentAndId_User (Long id_comment, Long id_user);
+    Optional<LikeComment> findByIdCommentAndIdUser (Long idComment, Long idUser);
 
-    Long countLikeCommentById_Comment(Long id_post);
+    Long countLikeCommentByIdComment(Long idPost);
 
-    void deleteAllById_Comment(Long id_post);
+    void deleteAllByIdComment(Long idPost);
 }

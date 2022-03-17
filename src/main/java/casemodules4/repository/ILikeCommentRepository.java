@@ -10,9 +10,9 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface ILikeCommentRepository extends JpaRepository<LikeComment, Long> {
-    Optional<LikeComment> findById_CommentAndId_User(Long id_comment, Long id_user);
+    Optional<LikeComment> findByIdCommentAndIdUser(Long idComment, Long idUser);
 
-    Long countLikeCommentById_Comment(Long id_post);
+    Long countLikeCommentByIdComment(Long idPost);
 
-    void deleteAllById_Comment(Long id_post);
+    void deleteAllByIdComment(Long idPost);
 }
