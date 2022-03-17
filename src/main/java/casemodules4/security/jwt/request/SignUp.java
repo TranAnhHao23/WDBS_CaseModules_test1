@@ -15,16 +15,6 @@ public class SignUp {
     public SignUp() {
     }
 
-    public SignUp(String fullName, String phoneNumber, String address, String account, String email, String password, Set<String> roles) {
-        this.fullName = fullName;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.account = account;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
