@@ -58,7 +58,7 @@ public class GroupMembersController {
     public ResponseEntity<GroupMembers> outGroup(@PathVariable("id_user") Long id_user,
                                                 @PathVariable("id_group") Long id_group) {
         Optional<GroupMembers> groupMembers = groupMembersService.findById_GroupAndId_User(id_group, id_user);
-        groupMembersService.remove(groupMembers.get().getId());
+        groupMembersService.remove(id_group);
         return new ResponseEntity<>(groupMembers.get(), HttpStatus.OK);
     }
 }

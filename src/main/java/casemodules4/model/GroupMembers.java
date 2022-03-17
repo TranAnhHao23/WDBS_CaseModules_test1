@@ -31,7 +31,11 @@ public class GroupMembers {
         this.role = role;
     }
 
-    public Long getId() {
+    public GroupMembers() {
+
+    }
+
+    public EmbeddedGroupMembers getId() {
         return id;
     }
 
