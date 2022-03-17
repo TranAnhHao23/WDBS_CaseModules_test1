@@ -88,6 +88,7 @@ public class GroupController {
         post.setGroup((Set<Group>) groupService.findById(idGroup).get());
         post.setUser(userService.findById(idUser));
         Post postCreate = postService.save(post);
+        // asdhajksdasjkd
         return new ResponseEntity<>(postCreate, HttpStatus.CREATED);
     }
 
