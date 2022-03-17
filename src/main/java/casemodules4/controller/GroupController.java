@@ -64,18 +64,18 @@ public class GroupController {
     }
 
     //create group
-    @PostMapping("/create-group/{id_user}")
-    public ResponseEntity<Group> createGroup(@PathVariable("id_user") Long id_user, @RequestBody Group group) {
+    @PostMapping("/create-group/{idUser}")
+    public ResponseEntity<Group> createGroup(@PathVariable("idUser") Long idUser, @RequestBody Group group) {
         Group groupCreate = groupService.save(group);
-        User user = userService.findById(id_user);
+        User user = userService.findById(idUser);
         GroupMembers groupMembers = new GroupMembers(0, user, group);
         groupMembersService.save(groupMembers);
         return new ResponseEntity<>(groupCreate, HttpStatus.CREATED);
     }
 
     //create post in group + upload file
-    @PostMapping("/create-post/{id_group}/{id_user}")
-    public ResponseEntity<Post> createPost(@PathVariable("id_group") Long id_group, @PathVariable("id_user") Long id_user,
+    @PostMapping("/create-post/{idGroup}/{idUser}")
+    public ResponseEntity<Post> createPost(@PathVariable("idGroup") Long idGroup, @PathVariable("idUser") Long idUser,
                                            @RequestPart Post post, @RequestPart("file") MultipartFile file) {
         post.setDateCreated(LocalDate.now());
         String fileName = file.getOriginalFilename();
@@ -85,8 +85,8 @@ public class GroupController {
             e.printStackTrace();
         }
         post.setImgUrl(view + fileName);
-        post.setGroup((Set<Group>) groupService.findById(id_group).get());
-        post.setUser(userService.findById(id_user));
+        post.setGroup((Set<Group>) groupService.findById(idGroup).get());
+        post.setUser(userService.findById(idUser));
         Post postCreate = postService.save(post);
         return new ResponseEntity<>(postCreate, HttpStatus.CREATED);
     }

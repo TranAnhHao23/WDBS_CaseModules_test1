@@ -36,29 +36,29 @@ public class GroupMembersController {
         return new ResponseEntity<>(groupsMembers, HttpStatus.OK);
     }
 
-    @PostMapping("/send-request/{id_user}/{id_group}")
-    public ResponseEntity<GroupMembers> sendRequest(@PathVariable("id_user") Long id_user,
-                                                   @PathVariable("id_group") Long id_group) {
-        Optional<User> user = Optional.ofNullable(userService.findById(id_user));
-        Optional<Group> group = groupService.findById(id_group);
+    @PostMapping("/send-request/{idUser}/{idGroup}")
+    public ResponseEntity<GroupMembers> sendRequest(@PathVariable("idUser") Long idUser,
+                                                   @PathVariable("idGroup") Long idGroup) {
+        Optional<User> user = Optional.ofNullable(userService.findById(idUser));
+        Optional<Group> group = groupService.findById(idGroup);
         GroupMembers groupMembers = new GroupMembers(2, user.get(), group.get());
         return new ResponseEntity<>(groupMembersService.save(groupMembers), HttpStatus.CREATED);
     }
 
-    @PutMapping("/join-group/{id_user}/{id_group}")
-    public ResponseEntity<GroupMembers> joinGroup(@PathVariable("id_user") Long id_user,
-                                                 @PathVariable("id_group") Long id_group) {
-        Optional<GroupMembers> groupMembers = groupMembersService.findById_GroupAndId_User(id_group, id_user);
+    @PutMapping("/join-group/{idUser}/{idGroup}")
+    public ResponseEntity<GroupMembers> joinGroup(@PathVariable("idUser") Long idUser,
+                                                 @PathVariable("idGroup") Long idGroup) {
+        Optional<GroupMembers> groupMembers = groupMembersService.findByIdGroupAndIdUser(idGroup, idUser);
         groupMembers.get().setStatus(1);
         groupMembersService.save(groupMembers.get());
         return new ResponseEntity<>(groupMembers.get(), HttpStatus.OK);
     }
 
-    @DeleteMapping("/out-group/{id_user}/{id_group}")
-    public ResponseEntity<GroupMembers> outGroup(@PathVariable("id_user") Long id_user,
-                                                @PathVariable("id_group") Long id_group) {
-        Optional<GroupMembers> groupMembers = groupMembersService.findById_GroupAndId_User(id_group, id_user);
-        groupMembersService.remove(id_group);
+    @DeleteMapping("/out-group/{idUser}/{idGroup}")
+    public ResponseEntity<GroupMembers> outGroup(@PathVariable("idUser") Long idUser,
+                                                @PathVariable("idGroup") Long idGroup) {
+        Optional<GroupMembers> groupMembers = groupMembersService.findByIdGroupAndIdUser(idGroup, idUser);
+        groupMembersService.remove(idGroup);
         return new ResponseEntity<>(groupMembers.get(), HttpStatus.OK);
     }
 }
