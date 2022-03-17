@@ -1,6 +1,7 @@
 package casemodules4.service.impl;
 
 import casemodules4.model.Post;
+import casemodules4.model.User;
 import casemodules4.repository.IPostRepository;
 import casemodules4.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,13 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public List<Post> findAllByUserPostIdUser(Long id) {
-        return postRepository.findAllByUserPostIdUser(id);
+    public List<Post> findAllByUserPostIdUserOrStatus(Long id, String status) {
+        return postRepository.findAllByUserPostIdUserOrStatus(id, status);
     }
+
+    @Override
+    public List<Post> findAllByUserPostAndStatus(User user, String status) {
+        return postRepository.findAllByUserPostAndStatus(user, status);
+    }
+
 }

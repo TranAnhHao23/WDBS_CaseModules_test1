@@ -15,5 +15,8 @@ public interface IUserService {
 
     List<User> findAllByFullNameContaining(String name);
 
+    User findByAccount_Id(Long id);
+
+
 
 }

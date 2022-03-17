@@ -1,6 +1,7 @@
 package casemodules4.service;
 
 import casemodules4.model.FriendList;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface IFriendListService {
     void blockFriend(Long userFromId, Long userToId);
 
     String checkFriendStatus(Long userFirstId, Long userSecondId);
+
+    List<FriendList> findFriendListByIdUser(@Param("idUser") Long idUser);
 }

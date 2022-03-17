@@ -68,6 +68,11 @@ public class FriendListServiceImpl implements IFriendListService {
     }
 
     @Override
+    public List<FriendList> findFriendListByIdUser(Long idUser) {
+        return friendListRepository.findFriendListByIdUser(idUser);
+    }
+
+    @Override
     // Trùng phương thức
     public void sendFriendRequest(FriendList friendList) {
         String status = checkFriendStatus(friendList.getUserFrom().getIdUser(), friendList.getUserTo().getIdUser());
