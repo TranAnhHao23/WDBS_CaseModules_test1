@@ -41,4 +41,9 @@ public class UserServiceImpl implements IUserService {
     public List<User> findAllByFullNameContaining(String name) {
         return userRepository.findAllByFullNameContaining(name);
     }
+
+    @Override
+    public User findByAccount_Id(Long id) {
+        return userRepository.findByAccount_Id(id);
+    }
 }

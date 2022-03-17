@@ -1,6 +1,7 @@
 package casemodules4.service;
 
 import casemodules4.model.Post;
+import casemodules4.model.User;
 
 import java.util.List;
 
@@ -15,5 +16,8 @@ public interface IPostService {
 
     List<Post> findAllByContentContaining(String hashtag);
 
-    List<Post> findAllByUserPostIdUser(Long id);
+    List<Post> findAllByUserPostIdUserOrStatus(Long id, String status);
+
+    List<Post> findAllByUserPostAndStatus(User user, String status);
+
 }

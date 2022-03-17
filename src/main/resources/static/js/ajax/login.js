@@ -16,7 +16,8 @@ function login() {
         success: function (data) {
             console.log("hello anh em")
             console.log(data)
-            window.open("newsfeed.html", "_blank")
+            localStorage.setItem("accountId", data.id)
+            window.open("newsfeed.html", "_self")
         },
         error: function (){
             window.location.href = "404-2.html"

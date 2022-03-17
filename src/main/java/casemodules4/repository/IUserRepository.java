@@ -12,4 +12,6 @@ import java.util.List;
 public interface IUserRepository extends JpaRepository<User, Long> {
     List<User> findAllByFullNameContaining(String name);
     User findByFullName(String fullName);
+
+    User findByAccount_Id(Long id);
 }
