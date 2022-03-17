@@ -8,4 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface IGroupRepository extends JpaRepository<Group, Long> {
+    Iterable<Group> findAllByNameContaining(String name);
 }

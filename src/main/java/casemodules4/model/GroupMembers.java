@@ -24,6 +24,9 @@ public class GroupMembers {
     public GroupMembers() {
     }
 
+    public GroupMembers(int i, User user, Group group) {
+    }
+
     public GroupMembers(EmbeddedGroupMembers id, Group group, User user, String role) {
         this.id = id;
         this.group = group;
@@ -34,6 +37,10 @@ public class GroupMembers {
     public EmbeddedGroupMembers getId() {
         return id;
     }
+
+    //    public Long getId() {
+//        return id;
+//    }
 
     public void setId(EmbeddedGroupMembers id) {
         this.id = id;
@@ -61,5 +68,8 @@ public class GroupMembers {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setStatus(int i) {
     }
 }

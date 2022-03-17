@@ -17,14 +17,14 @@ public class Post {
 
     private String imgUrl;
 
-    private LocalDate createdDate;
+    private LocalDate DateCreated;
 
     private String imgFile;
 //    @Transient
 //    private MultipartFile imgFile;
 
     @ManyToOne
-    private User userPost;
+    private User user;
 
     @OneToMany
     @JoinTable(name = "commentInPost")
@@ -36,13 +36,13 @@ public class Post {
     public Post() {
     }
 
-    public Post(Long idPost, String content, String imgUrl, LocalDate createdDate, String imgFile, User userPost, Set<Comment> comments, Set<Group> groups) {
+    public Post(Long idPost, String content, String imgUrl, LocalDate dateCreated, String imgFile, User user, Set<Comment> comments, Set<Group> groups) {
         this.idPost = idPost;
         this.content = content;
         this.imgUrl = imgUrl;
-        this.createdDate = createdDate;
+        DateCreated = dateCreated;
         this.imgFile = imgFile;
-        this.userPost = userPost;
+        this.user = user;
         this.comments = comments;
         this.groups = groups;
     }
@@ -79,12 +79,12 @@ public class Post {
         this.imgFile = imgFile;
     }
 
-    public User getUserPost() {
-        return userPost;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserPost(User userPost) {
-        this.userPost = userPost;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<Comment> getComments() {
@@ -103,11 +103,11 @@ public class Post {
         this.groups = groups;
     }
 
-    public LocalDate getCreatedDate() {
-        return createdDate;
+    public LocalDate getDateCreated() {
+        return DateCreated;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
+    public void setDateCreated(LocalDate dateCreated) {
+        DateCreated = dateCreated;
     }
 }

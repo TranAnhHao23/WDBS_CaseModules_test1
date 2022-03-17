@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements IPostService {
-
     @Autowired
     private IPostRepository postRepository;
 
@@ -38,5 +37,10 @@ public class PostServiceImpl implements IPostService {
     @Override
     public List<Post> findAllByContentContaining(String hashtag) {
         return postRepository.findAllByContentContaining(hashtag);
+    }
+
+    @Override
+    public List<Post> findAllByUserPostIdUser(Long id) {
+        return postRepository.findAllByUserPostIdUser(id);
     }
 }

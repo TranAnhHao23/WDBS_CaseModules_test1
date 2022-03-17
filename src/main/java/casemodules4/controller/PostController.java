@@ -51,7 +51,7 @@ public class PostController {
     @PostMapping("/{user_id}")
     public ResponseEntity<Post> createNewPost(@PathVariable("user_id") Long user_id,
                                               @RequestPart("post") Post post, @RequestPart("file")MultipartFile file){
-        post.setCreatedDate(LocalDate.now());
+        post.setDateCreated(LocalDate.now());
         String fileName = file.getOriginalFilename();
         try {
             FileCopyUtils.copy(file.getBytes(), new File(fileUpload + fileName));
@@ -59,7 +59,7 @@ public class PostController {
             io.printStackTrace();
         }
         post.setImgFile(view + fileName);
-        post.setUserPost(userService.findById(user_id));
+        post.setUser(userService.findById(user_id));
         Post postCreate = postService.save(post);
         return new ResponseEntity<>(postCreate, HttpStatus.CREATED);
     }

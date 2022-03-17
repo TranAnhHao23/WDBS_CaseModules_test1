@@ -15,4 +15,6 @@ public interface IPostService {
     void deleteById(Long id);
 
     List<Post> findAllByContentContaining(String hashtag);
+
+    List<Post> findAllByUserPostIdUser(Long id);
 }

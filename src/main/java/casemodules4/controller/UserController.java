@@ -1,6 +1,8 @@
 package casemodules4.controller;
 
+import casemodules4.model.Post;
 import casemodules4.model.User;
+import casemodules4.service.IPostService;
 import casemodules4.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,10 +25,23 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IPostService postService;
+
     @Value("${upload.path}")
     private String fileUpload;
 
-    @GetMapping
+    @GetMapping("/{idUser}")
+    public ModelAndView showAll(@PathVariable("idUser") Long idUser){
+        ModelAndView modelAndView = new ModelAndView("newsfeed");
+        User user = userService.findById(idUser);
+        List<Post> posts = postService.findAllByUserPostIdUser(idUser);
+        modelAndView.addObject("posts",posts);
+        modelAndView.addObject("user", user);
+        return modelAndView;
+    }
+
+    @GetMapping("/list")
     public ResponseEntity<List<User>> showAllUsers() {
         List<User> users = userService.findAll();
         if (users.isEmpty()) {
@@ -35,7 +50,7 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/{idUser}")
+    @GetMapping("/list/{idUser}")
     public ResponseEntity<User> showDetailUser(@PathVariable("idUser") Long id) {
         User user = userService.findById(id);
         if (user == null) {
