@@ -10,10 +10,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
-    private String phoneNumber;
-
     private String fullName;
-
+    private String phoneNumber;
     private String dateOfBirth;
     private String address;
 
@@ -38,6 +36,13 @@ public class User {
         this.imgUrl = imgUrl;
         this.account = account;
         this.imgFile = imgFile;
+    }
+
+    public User(String fullName, String phoneNumber, String address, Account account) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.account = account;
     }
 
     public Long getIdUser() {

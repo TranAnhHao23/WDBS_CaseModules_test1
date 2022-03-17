@@ -70,41 +70,36 @@
 							</p>
 						<form method="post">
 							<div class="form-group">	
-							  <input type="text" required="required"/>
+							  <input type="text" required="required" id="fullName"/>
 							  <label class="control-label">First & Last Name</label><i class="mtrl-select"></i>
 							</div>
+							<div class="form-group">
+								<input type="text" required="required" id="phoneNumber"/>
+								<label class="control-label">Phone</label><i class="mtrl-select"></i>
+							</div>
+							<div class="form-group">
+								<input type="text" required="required" id="mail"/>
+								<label class="control-label">Mail</label><i class="mtrl-select"></i>
+							</div>
+							<div class="form-group">
+								<input type="text" required="required" id="address"/>
+								<label class="control-label">Address</label><i class="mtrl-select"></i>
+							</div>
 							<div class="form-group">	
-							  <input type="text" required="required"/>
+							  <input type="text" required="required" id="acc"/>
 							  <label class="control-label">User Name</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="password" required="required"/>
+							  <input type="password" required="required" id="pass"/>
 							  <label class="control-label">Password</label><i class="mtrl-select"></i>
 							</div>
-							<div class="form-radio">
-							  <div class="radio">
-								<label>
-								  <input type="radio" name="radio" checked="checked"/><i class="check-box"></i>Male
-								</label>
-							  </div>
-							  <div class="radio">
-								<label>
-								  <input type="radio" name="radio"/><i class="check-box"></i>Female
-								</label>
-							  </div>
-							</div>
-							<div class="form-group">	
-							  <input type="text" required="required"/>
-							  <label class="control-label"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c29010d05002c">[email&#160;protected]</a></label><i class="mtrl-select"></i>
-							</div>
-							<div class="checkbox">
-							  <label>
-								<input type="checkbox" checked="checked"/><i class="check-box"></i>Accept Terms & Conditions ?
-							  </label>
+							<div class="form-group" hidden>
+								<input type="text" required="required" id="role"/>
+								<label class="control-label">Role</label><i class="mtrl-select"></i>
 							</div>
 							<a href="#" title="" class="already-have">Already have an account</a>
 							<div class="submit-btns">
-								<button class="mtr-btn signup" type="button"><span>Register</span></button>
+								<button class="mtr-btn signup" type="button" onclick="regis()"><span>Register</span></button>
 							</div>
 						</form>
 					</div>

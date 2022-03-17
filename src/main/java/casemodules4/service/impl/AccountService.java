@@ -13,7 +13,7 @@ public class AccountService implements IAccountService {
     private IAccountRepository accountRepository;
     @Override
     public Iterable<Account> findAllByUsername(String username) {
-        return accountRepository.findAllByUsernameContaining(username);
+        return accountRepository.findAllByAccount(username);
     }
 
     @Override
@@ -23,12 +23,12 @@ public class AccountService implements IAccountService {
 
     @Override
     public Optional<Account> findByUsername(String name) {
-        return accountRepository.findByUsername(name);
+        return accountRepository.findByAccount(name);
     }
 
     @Override
     public Boolean existsByUsername(String name) {
-        return accountRepository.existsByUsername(name);
+        return accountRepository.existsByAccount(name);
     }
 
     @Override

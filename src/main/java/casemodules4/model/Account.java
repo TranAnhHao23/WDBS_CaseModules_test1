@@ -10,7 +10,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String account;
     private String password;
     private String email;
 
@@ -23,9 +23,22 @@ public class Account {
     public Account() {
     }
 
-    public Account(String username, String password) {
-        this.username = username;
+    public Account(String account, String password) {
+        this.account = account;
         this.password = password;
+    }
+
+    public Account(String account, String password, String email, Set<Role> roles) {
+        this.account = account;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+    }
+
+    public Account(String account, String password, String email) {
+        this.account = account;
+        this.password = password;
+        this.email = email;
     }
 
     public Long getId() {
@@ -36,12 +49,12 @@ public class Account {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccount(String username) {
+        this.account = username;
     }
 
     public String getPassword() {
