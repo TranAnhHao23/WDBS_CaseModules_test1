@@ -33,4 +33,7 @@ public interface IFriendListRepository extends JpaRepository<FriendList, Long> {
     @Query(value = "select status from friend_list where user_from_id_user =:idUserFrom and user_to_id_user = :idUserTo", nativeQuery = true)
     String checkFriendsStatus(@Param("idUserFrom") Long idUserFrom, @Param("idUserTo") Long idUserTo);
 
+    @Query(value = "select * from friend_list where user_to_id_user = :idUser and status = 'pending'", nativeQuery = true)
+    List<FriendList> findAllPendingByIdUser(@Param("idUser") Long idUser);
+
 }

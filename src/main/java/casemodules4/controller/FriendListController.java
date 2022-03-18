@@ -58,4 +58,6 @@ public class FriendListController {
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
+//    @GetMapping
+
 }
