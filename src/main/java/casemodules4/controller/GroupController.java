@@ -83,8 +83,8 @@ public class GroupController {
             e.printStackTrace();
         }
         post.setImgUrl(view + fileName);
-        post.setGroup((Set<Group>) groupService.findById(idGroup).get());
-        post.setUser(userService.findById(idUser));
+        post.setGroups((Set<Group>) groupService.findById(idGroup).get());
+        post.setUserPost(userService.findById(idUser));
         Post postCreate = postService.save(post);
         return new ResponseEntity<>(postCreate, HttpStatus.CREATED);
     }

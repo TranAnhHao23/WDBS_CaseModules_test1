@@ -36,15 +36,6 @@ public class GroupMembersController {
         return new ResponseEntity<>(groupsMembers, HttpStatus.OK);
     }
 
-    @PostMapping("/send-request/{idUser}/{idGroup}")
-    public ResponseEntity<GroupMembers> sendRequest(@PathVariable("idUser") Long idUser,
-                                                   @PathVariable("idGroup") Long idGroup) {
-        Optional<User> user = Optional.ofNullable(userService.findById(idUser));
-        Optional<Group> group = groupService.findById(idGroup);
-        GroupMembers groupMembers = new GroupMembers(2, user.get(), group.get());
-        return new ResponseEntity<>(groupMembersService.save(groupMembers), HttpStatus.CREATED);
-    }
-
     @PutMapping("/join-group/{idUser}/{idGroup}")
     public ResponseEntity<GroupMembers> joinGroup(@PathVariable("idUser") Long idUser,
                                                  @PathVariable("idGroup") Long idGroup) {

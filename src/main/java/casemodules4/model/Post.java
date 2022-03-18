@@ -17,6 +17,8 @@ public class Post {
 
     private String status;
 
+    private LocalDate DateCreated;
+
     private String imgUrl;
 
     @Transient
@@ -110,12 +112,12 @@ public class Post {
         this.groups = groups;
     }
 
-    public void setDateCreated(LocalDate now) {
+    public LocalDate getDateCreated() {
+        return DateCreated;
     }
 
-    public void setGroup(Set<Group> groups) {
+    public void setDateCreated(LocalDate dateCreated) {
+        DateCreated = dateCreated;
     }
 
-    public void setUser(User byId) {
-    }
 }
