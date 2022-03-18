@@ -126,5 +126,15 @@ public class FriendListServiceImpl implements IFriendListService {
         return status;
     }
 
+    @Override
+    public List<FriendList> findAllPendingByIdUser(Long idUser) {
+        return friendListRepository.findAllPendingByIdUser(idUser);
+    }
+
+//    @Override
+//    public int countFriendByIdUser(Long idUser) {
+//        return friendListRepository.countFriendByIdUser(idUser);
+//    }
+
 
 }

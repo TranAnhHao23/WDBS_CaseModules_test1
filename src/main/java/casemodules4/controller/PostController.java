@@ -86,6 +86,7 @@ public class PostController {
     }
 
 
+
     @PostMapping
     public ResponseEntity<Post> createNewPost(@RequestBody Post post){
         if (post == null){

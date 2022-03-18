@@ -134,6 +134,16 @@ public class UserController {
         return new ResponseEntity<>(usersNonFriend, HttpStatus.OK);
     }
 
+    @GetMapping("/{idUser}/pending")
+    public ResponseEntity<List<User>> findAllPendingByIdUser(@PathVariable("idUser") Long id) {
+        List<FriendList> friendLists = friendListService.findAllPendingByIdUser(id);
+        List<User> users = new ArrayList<>();
+        for (FriendList friendList : friendLists) {
+            users.add(friendList.getUserFrom());
+        }
+        return new ResponseEntity<>(users,HttpStatus.OK);
+    }
+
     public List<User> getListFriendList(Long idUser) {
         List<FriendList> friendLists = friendListService.findFriendListByIdUser(idUser);
         List<User> users = new ArrayList<>();
