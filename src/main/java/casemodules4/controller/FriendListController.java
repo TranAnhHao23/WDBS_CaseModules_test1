@@ -52,4 +52,10 @@ public class FriendListController {
         friendListService.blockFriend(userToId, userFromId);
     }
 
+    @GetMapping("/{idUserFrom}/{idUserTo}/checkFriendShip")
+    public ResponseEntity<String> getFriendShip(@PathVariable("idUserFrom") Long idUserFrom,@PathVariable("idUserTo") Long idUserTo){
+        String status = friendListService.checkFriendsStatus(idUserFrom, idUserTo);
+        return new ResponseEntity<>(status, HttpStatus.OK);
+    }
+
 }

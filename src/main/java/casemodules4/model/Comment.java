@@ -13,9 +13,21 @@ public class Comment {
     private String content;
 
     @ManyToOne
+    private User user;
+
+    @ManyToOne
     private Comment comment;
 
     public Comment() {
+    }
+
+    public User getUser() {
+
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getIdComment() {

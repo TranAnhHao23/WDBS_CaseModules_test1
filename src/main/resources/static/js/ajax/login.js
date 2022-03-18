@@ -17,6 +17,7 @@ function login() {
             console.log("hello anh em")
             console.log(data)
             localStorage.setItem("accountId", data.id)
+            localStorage.setItem("token", data.token)
             window.open("newsfeed.html", "_self")
         },
         error: function (){

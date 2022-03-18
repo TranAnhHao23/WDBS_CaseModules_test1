@@ -20,6 +20,11 @@ public class LikePost {
     public LikePost() {
     }
 
+    public LikePost(Post post, User userLike) {
+        this.post = post;
+        this.userLike = userLike;
+    }
+
     public LikePost(Long idLikePost, Post post, User userLike) {
         this.idLikePost = idLikePost;
         this.post = post;

@@ -23,4 +23,6 @@ public interface IFriendListService {
     String checkFriendStatus(Long userFirstId, Long userSecondId);
 
     List<FriendList> findFriendListByIdUser(@Param("idUser") Long idUser);
+
+    String checkFriendsStatus(Long idUserFrom, Long idUserTo);
 }
