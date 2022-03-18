@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,5 +29,8 @@ public interface IFriendListRepository extends JpaRepository<FriendList, Long> {
     @Modifying
     @Query(value = "UPDATE friend_list SET status = 'block' WHERE user_from_id_user = :userFromId AND user_to_id_user = :userToId", nativeQuery = true)
     void blockFriendRequest(Long userFromId, Long userToId);
+
+    @Query(value = "select status from friend_list where user_from_id_user =:idUserFrom and user_to_id_user = :idUserTo", nativeQuery = true)
+    String checkFriendsStatus(@Param("idUserFrom") Long idUserFrom, @Param("idUserTo") Long idUserTo);
 
 }

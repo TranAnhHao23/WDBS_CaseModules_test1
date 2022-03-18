@@ -1,6 +1,5 @@
 package casemodules4.controller;
 
-import casemodules4.mail_sender.model.MyConstants;
 import casemodules4.model.Account;
 import casemodules4.model.Role;
 import casemodules4.model.User;

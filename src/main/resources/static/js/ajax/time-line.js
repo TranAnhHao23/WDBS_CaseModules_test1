@@ -1,19 +1,27 @@
 function addUser() {
-    let idUser = localStorage.getItem("accountId");
+    let idUser = localStorage.getItem("accountFriend");
 
     $.ajax({
         type: "POST",
         url: `http://localhost:8080/users/find/${idUser}`,
         success: function (user) {
             document.getElementById("imageNavbar").innerHTML = `<img src="${user.imgUrl}" style="width: 32px; height: 32px;border-radius: 100%" alt="">`
-            document.getElementById("imagePost").innerHTML = `<img src="${user.imgUrl}" style="width: 60px; height: 60px;border-radius: 100%" alt="">`
+            document.getElementById("imageMain").innerHTML = `<img src="${user.imgUrl}" alt="">
+                                <form class="edit-phto">
+                                    <i class="fa fa-camera-retro"></i>
+                                    <label class="fileContainer">
+                                        Edit Display Photo
+                                        <input type="file"/>
+                                    </label>
+                                </form>`
+            document.getElementById("nameUser").innerHTML = `<h5>${user.fullName}</h5>`
+            // document.getElementById("imagePost").innerHTML = `<img src="${user.imgUrl}" alt="">`
         }
     })
 }
 
-
-function postNewsfeed() {
-    let idUser = localStorage.getItem("accountId");
+function getFriendList() {
+    let idUser = localStorage.getItem("accountFriend");
     $.ajax({
         type: "GET",
         headers: {
@@ -21,14 +29,73 @@ function postNewsfeed() {
             'Content-Type': 'application/json',
             // 'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
-        url: `http://localhost:8080/post/${idUser}/newsfeed`,
+        url: `http://localhost:8080/users/${idUser}/friend-list`,
+
+        success: function (users) {
+            let content = "";
+            for (let i = 0; i < users.length; i++) {
+                content += `<li>
+                    <figure>
+                        <img src="${users[i].imgUrl}" alt="">
+                            <span class="status f-online"></span>
+                    </figure>
+                    <div class="friendz-meta">
+                        <a href="../time-line.html">${users[i].fullName}</a>
+                        <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
+                              data-cfemail="f2859b9c869780819d9e969780b2959f939b9edc919d9f">[email&#160;protected]</a></i>
+                    </div>
+                </li>`
+            }
+            document.getElementById("people-list").innerHTML = content;
+        }
+    })
+}
+
+function getNonFriend() {
+    let idUser = localStorage.getItem("accountFriend");
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        url: `http://localhost:8080/users/${idUser}/non-friend-list`,
+
+        success: function (users) {
+            let content = "";
+            for (let i = 0; i < users.length; i++) {
+                content += `<li>
+                    <figure><img src="${users[i].imgUrl}" alt=""></figure>
+                    <div class="friend-meta">
+                        <h4><a href="time-line.html" onclick="getTimeLine(${idUser},${users[i].idUser})" title="">${users[i].fullName}</a></h4>
+                        <a href="#" title="" class="underline">Add Friend</a>
+                    </div>
+                </li>`
+            }
+            document.getElementById("non-friend-list").innerHTML = content;
+        }
+    })
+}
+
+function postTimeline(){
+    let idUserFrom = localStorage.getItem("accountId");
+    let idUserTo = localStorage.getItem("accountFriend");
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        url: `http://localhost:8080/post/${idUserFrom}/${idUserTo}/timeline`,
 
         success: function (posts) {
             let content = "";
             for (let i = 0; i < posts.length; i++) {
                 content += postDetail(posts[i]);
             }
-            document.getElementById('postInNewsfeed').innerHTML = content;
+            document.getElementById('postInTimeline').innerHTML = content;
         }
     })
     event.preventDefault()
@@ -150,86 +217,47 @@ function likePost(idPost) {
     event.preventDefault();
 }
 
-function getFriendList() {
-    let idUser = localStorage.getItem("accountId");
+function checkFriendStatus(){
+    let idUserFrom = localStorage.getItem("accountId");
+    let idUserTo = localStorage.getItem("accountFriend");
+
     $.ajax({
         type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-        },
-        url: `http://localhost:8080/users/${idUser}/friend-list`,
+        url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/checkFriendShip`,
 
-        success: function (users) {
-            let content = "";
-            for (let i = 0; i < users.length; i++) {
-                content += `<li>
-                    <figure>
-                        <img src="${users[i].imgUrl}" alt="">
-                            <span class="status f-online"></span>
-                    </figure>
-                    <div class="friendz-meta">
-                        <a href="../time-line.html">${users[i].fullName}</a>
-                        <i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__"
-                              data-cfemail="f2859b9c869780819d9e969780b2959f939b9edc919d9f">[email&#160;protected]</a></i>
-                    </div>
-                </li>`
+        success: function (status){
+            if (idUserFrom === idUserTo){
+                document.getElementById("friendShip").hidden = true;
+            } else {
+                if (status === "friend"){
+                    document.getElementById("friendShip").hidden = false;
+                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" data-ripple="">UnFriend</a>
+                                                                                <a href="#" title="" data-ripple="">Block</a>`
+                } else if (status ==="pending"){
+                    document.getElementById("friendShip").hidden = false;
+                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" data-ripple="">Cancel Request</a>
+                                                                                <a href="#" title="" data-ripple="">Block</a>`
+                } else if (status === "respond"){
+                    document.getElementById("friendShip").hidden = false;
+                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" data-ripple="">Accept Request</a>
+                                                                                <a href="#" title="" data-ripple="">Cancel Request</a>
+                                                                                <a href="#" title="" data-ripple="">Block</a>`
+                } else if (status === "block"){
+                    document.getElementById("friendShip").hidden = false;
+                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" data-ripple="">Unblock</a>`
+                } else if (status === "blocked"){
+                    document.getElementById("friendShip").hidden = true;
+                }
             }
-            document.getElementById("people-list").innerHTML = content;
+
         }
     })
-}
-
-function getNonFriend() {
-    let idUser = localStorage.getItem("accountId");
-    $.ajax({
-        type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
-        },
-        url: `http://localhost:8080/users/${idUser}/non-friend-list`,
-
-        success: function (users) {
-            let content = "";
-            for (let i = 0; i < users.length; i++) {
-                content += `<li>
-                    <figure><img src="${users[i].imgUrl}" alt=""></figure>
-                    <div class="friend-meta">
-                        <h4><a href="time-line.html" onclick="getTimeLine(${idUser}, ${users[i].idUser})" title="">${users[i].fullName}</a></h4>
-                        <a href="#" title="" class="underline">Add Friend</a>
-                    </div>
-                </li>`
-            }
-            document.getElementById("non-friend-list").innerHTML = content;
-        }
-    })
-}
-
-function getTimeLine(idUser, idFriend){
-    localStorage.setItem("accountFriend",idFriend);
-    window.open("time-line.html","_blank");
-    event.preventDefault();
-}
-
-function getTimelineFriend(){
-    let idUser = localStorage.getItem("accountId");
-    window.open("timeline-friends.html","_blank");
-    event.preventDefault();
-}
-
-function getMyTimeLine() {
-    let idUser = localStorage.getItem("accountId");
-    localStorage.setItem("accountFriend", idUser);
-    window.open("time-line.html","_blank");
-    event.preventDefault();
 }
 
 window.onload = function (){
+    addUser()
     getNonFriend();
     getFriendList();
-    postNewsfeed();
-    addUser();
+    postTimeline();
+    checkFriendStatus();
 }

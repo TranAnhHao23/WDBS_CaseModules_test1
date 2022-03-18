@@ -100,6 +100,31 @@ public class FriendListServiceImpl implements IFriendListService {
             friendListRepository.save(new FriendList(userFrom, userTo, statusCreate));
         }
     }
+    @Override
+    public String checkFriendsStatus(Long idUserFrom, Long idUserTo) {
+        String status = "non friend";
+        String status1 = friendListRepository.checkFriendsStatus(idUserFrom, idUserTo);
+        String status2 = friendListRepository.checkFriendsStatus(idUserTo, idUserFrom);
+        if (friendListRepository.checkFriendsStatus(idUserFrom, idUserTo) == null){
+            status1 = "";
+        }
+        if (friendListRepository.checkFriendsStatus(idUserTo, idUserFrom) == null){
+            status2 = "";
+        }
+
+        if ((status1.equals("friend")) || (status2.equals("friend"))){
+            status = "friend";
+        } else if (status1.equals("pending")){
+            status = "pending";
+        } else if (status2.equals("pending")){
+            status = "respond";
+        } else if (status1.equals("block")){
+            status = "block";
+        } else if (status2.equals("block")){
+            status = "blocked";
+        }
+        return status;
+    }
 
 
 }

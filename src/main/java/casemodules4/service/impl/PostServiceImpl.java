@@ -38,6 +38,11 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
+    public List<Post> findAllByUserPostIdUser(Long id) {
+        return postRepository.findAllByUserPostIdUser(id);
+    }
+
+    @Override
     public List<Post> findAllByContentContaining(String hashtag) {
         return postRepository.findAllByContentContaining(hashtag);
     }

@@ -27,6 +27,9 @@ public class PostController {
     @Autowired
     private IFriendListService friendListService;
 
+    @Autowired
+    private IUserService userService;
+
     @GetMapping
     public ResponseEntity<List<Post>> showAllPost(){
         List<Post> posts = postService.findAll();
@@ -65,6 +68,22 @@ public class PostController {
         return new ResponseEntity<>(postsPublic, HttpStatus.OK);
     }
 
+    @GetMapping("/{idUserFrom}/{idUserTo}/timeline")
+    public ResponseEntity<List<Post>> getPostTimelineByIdUser(@PathVariable("idUserFrom") Long idUserFrom,@PathVariable("idUserTo") Long idUserTo){
+        String status = friendListService.checkFriendsStatus(idUserFrom, idUserTo);
+        List<Post> posts = new ArrayList<>();
+        if (idUserFrom == idUserTo){
+            posts = postService.findAllByUserPostIdUser(idUserTo);
+        } else {
+            if (status.equals("friend")){
+                posts = postService.findAllByUserPostIdUser(idUserTo);
+            } else if (status.equals("pending") || status.equals("")){
+                User user = userService.findById(idUserTo);
+                posts = postService.findAllByUserPostAndStatus(user, "public");
+            }
+        }
+            return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
 
 
     @PostMapping
