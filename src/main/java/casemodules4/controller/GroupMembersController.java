@@ -32,24 +32,33 @@ public class GroupMembersController {
         Iterable<GroupMembers> groupsMembers = groupMembersService.findAll();
         if (!groupsMembers.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(groupsMembers, HttpStatus.OK);
         }
-        return new ResponseEntity<>(groupsMembers, HttpStatus.OK);
     }
 
     @PutMapping("/join-group/{idUser}/{idGroup}")
     public ResponseEntity<GroupMembers> joinGroup(@PathVariable("idUser") Long idUser,
                                                  @PathVariable("idGroup") Long idGroup) {
         Optional<GroupMembers> groupMembers = groupMembersService.findByIdGroupAndIdUser(idGroup, idUser);
-        groupMembers.get().setRole("user");
-        groupMembersService.save(groupMembers.get());
-        return new ResponseEntity<>(groupMembers.get(), HttpStatus.OK);
+         if (groupMembers.isPresent()){
+             groupMembers.get().setRole("user");
+             groupMembersService.save(groupMembers.get());
+             return new ResponseEntity<>(groupMembers.get(), HttpStatus.OK);
+         } else {
+             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+         }
     }
 
     @DeleteMapping("/out-group/{idUser}/{idGroup}")
     public ResponseEntity<GroupMembers> outGroup(@PathVariable("idUser") Long idUser,
                                                 @PathVariable("idGroup") Long idGroup) {
         Optional<GroupMembers> groupMembers = groupMembersService.findByIdGroupAndIdUser(idGroup, idUser);
-        groupMembersService.remove(idGroup);
-        return new ResponseEntity<>(groupMembers.get(), HttpStatus.OK);
+        if (groupMembers.isPresent()){
+            groupMembersService.remove(idGroup);
+            return new ResponseEntity<>(groupMembers.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

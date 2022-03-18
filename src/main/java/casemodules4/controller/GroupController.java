@@ -102,7 +102,8 @@ public class GroupController {
         Iterable<Group> groupsList = groupService.findAllByName(search);
         if (!groupsList.iterator().hasNext()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(groupsList, HttpStatus.OK);
         }
-        return new ResponseEntity<>(groupsList, HttpStatus.OK);
     }
 }
