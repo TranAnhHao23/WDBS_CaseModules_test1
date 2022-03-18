@@ -1,9 +1,7 @@
 package casemodules4.controller;
 
-import casemodules4.model.Group;
-import casemodules4.model.GroupMembers;
-import casemodules4.model.Post;
-import casemodules4.model.User;
+import casemodules4.model.*;
+import casemodules4.repository.IGroupRepository;
 import casemodules4.service.IGroupMembersService;
 import casemodules4.service.IGroupService;
 import casemodules4.service.IPostService;
@@ -43,6 +41,9 @@ public class GroupController {
     @Autowired
     private IPostService postService;
 
+    @Autowired
+    private IGroupRepository iGroupRepository;
+
     @GetMapping("/get-group-member")
     public ResponseEntity<Iterable<GroupMembers>> getAllGroupMember() {
         Iterable<GroupMembers> groupMembers = groupMembersService.findAll();
@@ -65,8 +66,14 @@ public class GroupController {
     @PostMapping("/create-group/{idUser}")
     public ResponseEntity<Group> createGroup(@PathVariable("idUser") Long idUser, @RequestBody Group group) {
         Group groupCreate = groupService.save(group);
+        Group groupByName = iGroupRepository.findByName(group.getName());
         User user = userService.findById(idUser);
-        GroupMembers groupMembers = new GroupMembers(0, user, group);
+        EmbeddedGroupMembers embeddedGroupMembers = new EmbeddedGroupMembers(groupByName.getIdGroup(), idUser);
+        GroupMembers groupMembers = new GroupMembers();
+        groupMembers.setId(embeddedGroupMembers);
+        groupMembers.setGroup(groupByName);
+        groupMembers.setUser(user);
+        groupMembers.setRole("ROLE_GROUP_ADMIN");
         groupMembersService.save(groupMembers);
         return new ResponseEntity<>(groupCreate, HttpStatus.CREATED);
     }

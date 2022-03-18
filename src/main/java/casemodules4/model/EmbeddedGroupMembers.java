@@ -13,4 +13,11 @@ public class EmbeddedGroupMembers implements Serializable {
     @Column(name = "idUser")
     private Long idUser;
 
+    public EmbeddedGroupMembers() {
+    }
+
+    public EmbeddedGroupMembers(Long idGroup, Long idUser) {
+        this.idGroup = idGroup;
+        this.idUser = idUser;
+    }
 }

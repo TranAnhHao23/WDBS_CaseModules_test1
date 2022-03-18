@@ -22,6 +22,7 @@ public class GroupMembers {
     private String role;
 
     public GroupMembers(int i, User user, Group group) {
+
     }
 
     public GroupMembers(EmbeddedGroupMembers id, Group group, User user, String role) {
