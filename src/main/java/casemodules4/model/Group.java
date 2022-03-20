@@ -1,5 +1,7 @@
 package casemodules4.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,6 +15,11 @@ public class Group {
 
     private String name;
 
+    private String imgUrl;
+
+    @Transient
+    private MultipartFile imgFile;
+
     @ManyToMany
     @JoinTable(name = "groupPost",
             joinColumns = @JoinColumn(name = "idGroup"),
@@ -21,11 +28,20 @@ public class Group {
 
     public Group() {
     }
+    public String getImgUrl() {
+        return imgUrl;
+    }
 
-    public Group(Long idGroup, String name, Set<Post> postGroup) {
-        this.idGroup = idGroup;
-        this.name = name;
-        this.postGroup = postGroup;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public MultipartFile getImgFile() {
+        return imgFile;
+    }
+
+    public void setImgFile(MultipartFile imgFile) {
+        this.imgFile = imgFile;
     }
 
     public Long getIdGroup() {

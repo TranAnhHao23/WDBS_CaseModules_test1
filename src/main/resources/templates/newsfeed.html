@@ -235,7 +235,7 @@
 					<a href="#" title=""><span class="status f-online"></span>online</a>
 					<a href="#" title=""><span class="status f-away"></span>away</a>
 					<a href="#" title=""><span class="status f-off"></span>offline</a>
-					<a href="#" title=""><i class="ti-user"></i> view profile</a>
+					<a href="#" title="" onclick="getMyTimeLine()"><i class="ti-user"></i> view profile</a>
 					<a href="#" title=""><i class="ti-pencil-alt"></i>edit profile</a>
 					<a href="#" title=""><i class="ti-power-off"></i>log out</a>
 				</div>
@@ -277,11 +277,11 @@
 											</li>
 											<li>
 												<i class="ti-home"></i>
-												<a href="../people-nearby.html" title="">Joined Groups</a>
+												<a href="timeline-groups.html" onclick="getJoinedGroup()" title="">Joined Groups</a>
 											</li>
 											<li>
 												<i class="ti-user"></i>
-												<a href="../people-nearby.html" title="">Groups</a>
+												<a href="groups.html" title="">Groups</a>
 											</li>
 										</ul>
 									</div><!-- Shortcuts -->
@@ -301,9 +301,15 @@
 										</figure>
 										<div class="newpst-input">
 											<form method="post">
-												<textarea rows="2" placeholder="write something"></textarea>
+												<textarea name="contentPost" id="contentPost" rows="2" placeholder="write something"></textarea>
 												<div class="attachments">
 													<ul>
+														<li>
+															<select name="statusPost" id="statusPost">
+																<option value="public">Public</option>
+																<option value="friend">Friend</option>
+															</select>
+														</li>
 														<li>
 															<i class="fa fa-music"></i>
 															<label class="fileContainer">
@@ -313,7 +319,7 @@
 														<li>
 															<i class="fa fa-image"></i>
 															<label class="fileContainer">
-																<input type="file">
+																<input name="imgFile" id="imgFile" type="file">
 															</label>
 														</li>
 														<li>
@@ -329,7 +335,7 @@
 															</label>
 														</li>
 														<li>
-															<button type="submit">Post</button>
+															<button type="button" onclick="addNewPost()">Post</button>
 														</li>
 													</ul>
 												</div>

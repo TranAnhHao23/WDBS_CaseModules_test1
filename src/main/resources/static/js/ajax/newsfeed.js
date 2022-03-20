@@ -7,6 +7,7 @@ function addUser() {
         success: function (user) {
             document.getElementById("imageNavbar").innerHTML = `<img src="${user.imgUrl}" style="width: 32px; height: 32px;border-radius: 100%" alt="">`
             document.getElementById("imagePost").innerHTML = `<img src="${user.imgUrl}" style="width: 60px; height: 60px;border-radius: 100%" alt="">`
+            // document.getElementById("imageComment").innerHTML = `<img src="${user.imgUrl}" alt="">`
         }
     })
 }
@@ -14,6 +15,7 @@ function addUser() {
 
 function postNewsfeed() {
     let idUser = localStorage.getItem("accountId");
+
     $.ajax({
         type: "GET",
         headers: {
@@ -25,9 +27,13 @@ function postNewsfeed() {
 
         success: function (posts) {
             let content = "";
-            for (let i = 0; i < posts.length; i++) {
+            for (let i = posts.length-1; i >= 0; i--) {
                 content += postDetail(posts[i]);
             }
+
+            // for (let i = 0; i < posts.length; i++) {
+            //     content += postDetail(posts[i]);
+            // }
             document.getElementById('postInNewsfeed').innerHTML = content;
         }
     })
@@ -54,7 +60,7 @@ function postDetail(post) {
             let content = ""
             if (comments != null) {
                 for (let i = 0; i < comments.length; i++) {
-                    content += `<li ><div class="comet-avatar"><img src="${comments[i].user.imgUrl}" style="width: 45px; height: 45px; border-radius: 100%" alt="">
+                    content += `<li><div class="comet-avatar"><img src="${comments[i].user.imgUrl}" style="width: 45px; height: 45px; border-radius: 100%" alt="">
                                 </div>
                                 <div class="we-comment">
                                 <div class="coment-head">
@@ -78,6 +84,19 @@ function postDetail(post) {
                                 </li>
                                 </ul>`
                     }
+                    content += `<li class="post-comment" hidden>
+                        <div class="comet-avatar">
+                            
+                        </div>
+                        <div class="post-comt-box">
+                            <form method="post">
+                                <textarea name="" id="" placeholder="Reply comment"></textarea>
+                                <div class="add-smiles">
+                                    <a href="#" onclick=""><i class="fa fa-paper-plane" style=" color: blue" title="REPLY"></i></a>
+                                </div>
+                            </form>
+                        </div>
+                    </li>`
                     content += `</li>`
 
                 }
@@ -85,19 +104,18 @@ function postDetail(post) {
                         <a href="#" title="" class="showmore underline">more comments</a>
                     </li>
                     <li class="post-comment">
-                        <div class="comet-avatar">
-                            <img src="../static/images/resources/comet-1.jpg" alt="">
+                        <div class="comet-avatar" id="imageComment">
+                            
                         </div>
                         <div class="post-comt-box">
                             <form method="post">
-                                <textarea placeholder="Post your comment"></textarea>
+                                <textarea name="commentContent" id="commentContent(${post.idPost})" placeholder="Post your comment"></textarea>
                                 <div class="add-smiles">
-                                    <a href="#"><i class="fa fa-paper-plane" style=" color: blue" title="SEND"></i></a>
+                                    <a href="#" onclick="commentInPost(${post.idPost})"><i class="fa fa-paper-plane" style=" color: blue" title="SEND"></i></a>
                                 </div>
                             </form>
                         </div>
                     </li>`
-                console.log(content);
                 document.getElementById(`commentPost(${post.idPost})`).innerHTML = content;
             }
         }
@@ -227,9 +245,80 @@ function getMyTimeLine() {
     event.preventDefault();
 }
 
+function addNewPost(){
+    let data = new FormData();
+    let content = $('#contentPost').val();
+    let status = $('#statusPost').val();
+    let idPost = localStorage.getItem("accountId");
+    let newPost = {
+        content: content,
+        status: status,
+        userPost: {
+            idUser: idPost
+        }
+    }
+    data.append("file", $('#imgFile')[0].files[0]);
+    data.append("json", new Blob([JSON.stringify(newPost)],{
+        type: "application/json"
+    }))
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        processData: false,
+        contentType: false,
+        url: `http://localhost:8080/post/newPost`,
+
+        success: function (){
+            // console.log("Done")
+            window.open("newsfeed.html", "_self")
+        },
+        error: function (){
+            console.log("sai o dau do")
+        }
+    })
+}
+
+function commentInPost(idPost){
+    let idComment = localStorage.getItem("accountId");
+
+    let content = document.getElementById(`commentContent(${idPost})`).value;
+
+    let newComment = {
+        content: content,
+        user: {
+            idUser: idComment
+        }
+    }
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "POST",
+        data: JSON.stringify(newComment),
+        url: `http://localhost:8080/comment/${idPost}/commentInPost`,
+
+        success: function (){
+            postNewsfeed();
+            console.log("xong nha")
+        }
+
+    })
+}
+
+function getJoinedGroup(){
+    let idUser = localStorage.getItem("accountId");
+    localStorage.setItem("accountFriend", idUser);
+    window.open("timeline-groups.html","_blank");
+    event.preventDefault();
+}
+
+
 window.onload = function (){
+    addUser();
     getNonFriend();
     getFriendList();
     postNewsfeed();
-    addUser();
+
 }

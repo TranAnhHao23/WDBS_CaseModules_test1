@@ -180,16 +180,22 @@
                             </div><!-- sidebar -->
                             <div class="col-lg-6">
                                 <div class="loadMore">
-                                    <div class="central-meta item">
+                                    <div class="central-meta item" id="postDiv">
                                         <div class="new-postbox">
                                             <figure id="imagePost">
-                                                <img src="../static/images/resources/admin2.jpg" alt="">
+<!--                                                <img src="../static/images/resources/admin2.jpg" alt="">-->
                                             </figure>
                                             <div class="newpst-input">
                                                 <form method="post">
-                                                    <textarea rows="2" placeholder="write something"></textarea>
+                                                    <textarea name="contentPost" id="contentPost" rows="2" placeholder="Post enter to post"></textarea>
                                                     <div class="attachments">
                                                         <ul>
+                                                            <li>
+                                                                <select name="" id="statusPost">
+                                                                    <option value="public">Public</option>
+                                                                    <option value="friend">Friend</option>
+                                                                </select>
+                                                            </li>
                                                             <li>
                                                                 <i class="fa fa-music"></i>
                                                                 <label class="fileContainer">
@@ -199,7 +205,7 @@
                                                             <li>
                                                                 <i class="fa fa-image"></i>
                                                                 <label class="fileContainer">
-                                                                    <input type="file">
+                                                                    <input id="imgFile" type="file">
                                                                 </label>
                                                             </li>
                                                             <li>
@@ -215,7 +221,7 @@
                                                                 </label>
                                                             </li>
                                                             <li>
-                                                                <button type="submit">Publish</button>
+                                                                <button type="button" onclick="addNewPost()">Publish</button>
                                                             </li>
                                                         </ul>
                                                     </div>

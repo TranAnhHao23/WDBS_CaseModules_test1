@@ -15,12 +15,12 @@ function addUser() {
                                     </label>
                                 </form>`
             document.getElementById("nameUser").innerHTML = `<h5>${user.fullName}</h5>`
+            document.getElementById("imagePost").innerHTML = `<img src="${user.imgUrl}" alt="">`
         }
     })
 }
 
 function getFriendList() {
-    let idMain = localStorage.getItem("accountId")
     let idUser = localStorage.getItem("accountFriend");
     $.ajax({
         type: "GET",
@@ -46,44 +46,7 @@ function getFriendList() {
                     </div>
                 </li>`
             }
-            let content2 = ""
-            for (let i = 0; i < users.length; i++) {
-                content2 += `<li>
-                    <div class="nearly-pepls">
-                        <figure>
-                            <a href="time-line.html" onclick="getTimeLine(${idMain},${users[i].idUser})" title="">
-                            <img src="${users[i].imgUrl}" alt=""></a>
-                        </figure>
-                        <div class="pepl-info">
-                            <h4><a href="time-line.html" title="" onclick="getTimeLine(${idMain},${users[i].idUser})">${users[i].fullName}</a></h4>
-                            <a href="#" title=""  class="add-butn more-action" data-ripple="">unfriend</a>
-                            <a href="#" title="" class="add-butn" data-ripple="">block</a>
-                        </div>
-                    </div>
-                </li>`
-            }
-            let content3 = ""
-            for (let i = 0; i < users.length; i++) {
-                content3 += `<li>
-                    <div class="nearly-pepls">
-                        <figure>
-                            <a href="time-line.html" onclick="getTimeLine(${idMain},${users[i].idUser})" title="">
-                            <img src="${users[i].imgUrl}" alt=""></a>
-                        </figure>
-                        <div class="pepl-info">
-                            <h4><a href="time-line.html" title="" onclick="getTimeLine(${idMain},${users[i].idUser})">${users[i].fullName}</a></h4>
-                        </div>
-                    </div>
-                </li>`
-            }
             document.getElementById("people-list").innerHTML = content;
-            if (idMain === idUser){
-                document.getElementById("friend-list").innerHTML = content2;
-            } else {
-                document.getElementById("friend-list").innerHTML = content3;
-            }
-
-            document.getElementById("numberOfFriends").innerText = users.length;
         }
     })
 }
@@ -110,16 +73,15 @@ function getNonFriend() {
                     </div>
                 </li>`
             }
-
             document.getElementById("non-friend-list").innerHTML = content;
-
         }
     })
 }
 
-function getFriendRequest(){
-    let idMain = localStorage.getItem("accountId")
+function getJoinedGroup() {
+    let idMain = localStorage.getItem("accountId");
     let idUser = localStorage.getItem("accountFriend");
+
     $.ajax({
         type: "GET",
         headers: {
@@ -127,46 +89,65 @@ function getFriendRequest(){
             'Content-Type': 'application/json',
             // 'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
-        url: `http://localhost:8080/users/${idUser}/pending`,
-        
-        success: function (users){
-            if (idMain !== idUser){
-                document.getElementById("pending").hidden = true;
-                document.getElementById("numberOfPending").hidden = true;
-            } else {
-                let content = ""
-                for (let i = 0; i < users.length; i++) {
+        url: `http://localhost:8080/group/${idUser}/list-group`,
+
+        success: function (groups) {
+            let content = "";
+            if (idMain === idUser){
+                for (let i = 0; i < groups.length; i++) {
                     content += `<li>
                                 <div class="nearly-pepls">
                                     <figure>
-                                        <a href="time-line.html" onclick="getTimeLine(${idMain},${users[i].idUser})" title="">
-                                        <img src="${users[i].imgUrl}" alt=""></a>
+                                        <a href="fav-page.html" title=""><img src="${groups[i].imgUrl}" alt=""></a>
                                     </figure>
                                     <div class="pepl-info">
-                                        <h4><a href="time-line.html" title="" onclick="getTimeLine(${idMain},${users[i].idUser})">${users[i].fullName}</a></h4>
-                                        <a href="#" title="" class="add-butn more-action" data-ripple="">delete Request</a>
-                                        <a href="#" title="" class="add-butn" data-ripple="">Confirm</a>
+                                        <h4>
+                                            <a href="fav-page.html" title="">${groups[i].name}</a>
+                                        </h4>
+                                        <span>public group</span>
+                                        <a href="#" title="" onclick="leaveGroup(${groups[i].idGroup},${idUser})" class="add-butn" data-ripple="">leave group</a>
                                     </div>
                                 </div>
                             </li>`
                 }
-                document.getElementById("pending").innerHTML = content;
-                document.getElementById("numberOfPending").innerText = users.length;
+            } else {
+                for (let i = 0; i < groups.length; i++) {
+                    content += `<li>
+                                <div class="nearly-pepls">
+                                    <figure>
+                                        <a href="fav-page.html" title=""><img src="${groups[i].imgUrl}" alt=""></a>
+                                    </figure>
+                                    <div class="pepl-info">
+                                        <h4>
+                                            <a href="fav-page.html" title="">${groups[i].name}</a>
+                                        </h4>
+                                        <span>public group</span>
+<!--                                        <a href="#" title="" onclick="leaveGroup(${groups[i].idGroup},idUser)" class="add-butn" data-ripple="">leave group</a>-->
+                                    </div>
+                                </div>
+                            </li>`
+                }
             }
+            document.getElementById("list-group-joined").innerHTML = content;
         }
     })
 }
 
-function getTimeLine(idUser, idFriend){
-    localStorage.setItem("accountFriend",idFriend);
-    window.open("time-line.html","_blank");
-    event.preventDefault();
+function leaveGroup(idGroup, idUser){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/group/${idGroup}/${idUser}/leave`,
+
+        success: function (){
+            getJoinedGroup()
+        }
+    })
+    event.preventDefault()
 }
 
-
-window.onload = function (){
-    addUser();
-    getFriendList();
+window.onload = function () {
+    addUser()
     getNonFriend();
-    getFriendRequest();
+    getFriendList();
+    getJoinedGroup()
 }

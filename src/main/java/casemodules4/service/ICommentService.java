@@ -7,4 +7,6 @@ import java.util.List;
 public interface ICommentService {
 
     List<Comment> findAllByPostId(Long idPost);
+
+    Comment save(Long idOPost, Comment comment);
 }

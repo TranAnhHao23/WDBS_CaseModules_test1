@@ -15,7 +15,7 @@ function addUser() {
                                     </label>
                                 </form>`
             document.getElementById("nameUser").innerHTML = `<h5>${user.fullName}</h5>`
-            // document.getElementById("imagePost").innerHTML = `<img src="${user.imgUrl}" alt="">`
+            document.getElementById("imagePost").innerHTML = `<img src="${user.imgUrl}" alt="">`
         }
     })
 }
@@ -52,7 +52,7 @@ function getFriendList() {
 }
 
 function getNonFriend() {
-    let idUser = localStorage.getItem("accountFriend");
+    let idUser = localStorage.getItem("accountId");
     $.ajax({
         type: "GET",
         headers: {
@@ -92,7 +92,7 @@ function postTimeline(){
 
         success: function (posts) {
             let content = "";
-            for (let i = 0; i < posts.length; i++) {
+            for (let i = posts.length-1; i >= 0; i--) {
                 content += postDetail(posts[i]);
             }
             document.getElementById('postInTimeline').innerHTML = content;
@@ -146,25 +146,38 @@ function postDetail(post) {
                                 </ul>`
                     }
                     content += `</li>`
+                    content += `<li class="post-comment" hidden>
+                        <div class="comet-avatar">
+                            
+                        </div>
+                        <div class="post-comt-box">
+                            <form method="post">
+                                <textarea name="" id="" placeholder="Reply comment"></textarea>
+                                <div class="add-smiles">
+                                    <a href="#" onclick=""><i class="fa fa-paper-plane" style=" color: blue" title="REPLY"></i></a>
+                                </div>
+                            </form>
+                        </div>
+                    </li>`
+                    content += `</li>`
 
                 }
                 content += `<li>
                         <a href="#" title="" class="showmore underline">more comments</a>
                     </li>
                     <li class="post-comment">
-                        <div class="comet-avatar">
-                            <img src="../static/images/resources/comet-1.jpg" alt="">
+                        <div class="comet-avatar" id="imageComment">
+                            
                         </div>
                         <div class="post-comt-box">
                             <form method="post">
-                                <textarea placeholder="Post your comment"></textarea>
+                                <textarea name="commentContent" id="commentContent(${post.idPost})" placeholder="Post your comment"></textarea>
                                 <div class="add-smiles">
-                                    <a href="#"><i class="fa fa-paper-plane" style=" color: blue" title="SEND"></i></a>
+                                    <a href="#" onclick="commentInPost(${post.idPost})"><i class="fa fa-paper-plane" style=" color: blue" title="SEND"></i></a>
                                 </div>
                             </form>
                         </div>
                     </li>`
-                console.log(content);
                 document.getElementById(`commentPost(${post.idPost})`).innerHTML = content;
             }
         }
@@ -229,27 +242,183 @@ function checkFriendStatus(){
             if (idUserFrom === idUserTo){
                 document.getElementById("friendShip").hidden = true;
             } else {
+                document.getElementById("postDiv").hidden = true;
                 if (status === "friend"){
                     document.getElementById("friendShip").hidden = false;
-                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" data-ripple="">UnFriend</a>
-                                                                                <a href="#" title="" data-ripple="">Block</a>`
+                    document.getElementById("friendShip").innerHTML = `<a href="#" onclick="unFriend(${idUserFrom},${idUserTo})" title="" data-ripple="">UnFriend</a>
+                                                                                <a href="#" onclick="blockFriend(${idUserFrom},${idUserTo})" title="" data-ripple="">Block</a>`
                 } else if (status ==="pending"){
                     document.getElementById("friendShip").hidden = false;
-                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" data-ripple="">Cancel Request</a>
-                                                                                <a href="#" title="" data-ripple="">Block</a>`
+                    document.getElementById("friendShip").innerHTML = `<a href="#" onclick="cancelFriend(${idUserFrom},${idUserTo})" title="" data-ripple="">Cancel Request</a>
+                                                                                <a href="#" onclick="blockFriend(${idUserFrom},${idUserTo})" title="" data-ripple="">Block</a>`
                 } else if (status === "respond"){
                     document.getElementById("friendShip").hidden = false;
-                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" data-ripple="">Accept Request</a>
-                                                                                <a href="#" title="" data-ripple="">Cancel Request</a>
-                                                                                <a href="#" title="" data-ripple="">Block</a>`
+                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" onclick="acceptFriend(${idUserFrom},${idUserTo})" data-ripple="">Accept Request</a>
+                                                                                <a href="#" title="" onclick="cancelFriend(${idUserFrom},${idUserTo})" data-ripple="">Cancel Request</a>`
+
                 } else if (status === "block"){
                     document.getElementById("friendShip").hidden = false;
-                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" data-ripple="">Unblock</a>`
+                    document.getElementById("friendShip").innerHTML = `<a href="#" title=""onclick="unBlockFriend(${idUserFrom},${idUserTo})" data-ripple="">Unblock</a>`
                 } else if (status === "blocked"){
                     document.getElementById("friendShip").hidden = true;
+                } else if  (status === "non friend"){
+                    document.getElementById("friendShip").hidden = false;
+                    document.getElementById("friendShip").innerHTML = `<a href="#" title="" onclick="addFriend(${idUserFrom},${idUserTo})" data-ripple="">Add Friend</a>`
                 }
             }
 
+        }
+    })
+}
+
+function acceptFriend(idUserFrom, idUserTo){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/acceptFriend`,
+
+        success: function () {
+            getNonFriend();
+            getFriendList();
+            checkFriendStatus();
+        }
+    })
+    event.preventDefault()
+}
+
+function unFriend(idUserFrom, idUserTo){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/deleteFriendStatus`,
+
+        success: function () {
+            getNonFriend();
+            getFriendList();
+            checkFriendStatus();
+        }
+    })
+    event.preventDefault()
+}
+
+function cancelFriend(idUserFrom, idUserTo){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/deleteFriendStatus`,
+
+        success: function () {
+            getNonFriend();
+            getFriendList();
+            checkFriendStatus();
+        }
+    })
+    event.preventDefault()
+}
+
+function blockFriend(idUserFrom, idUserTo){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/blockFriend`,
+
+        success: function () {
+            getNonFriend();
+            getFriendList();
+            checkFriendStatus();
+        }
+    })
+    event.preventDefault()
+}
+
+function unBlockFriend(idUserFrom, idUserTo){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/deleteFriendStatus`,
+
+        success: function () {
+            getNonFriend();
+            getFriendList();
+            checkFriendStatus();
+        }
+    })
+    event.preventDefault()
+}
+
+function addFriend(idUserFrom, idUserTo){
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/addFriend`,
+
+        success: function () {
+            getNonFriend();
+            getFriendList();
+            checkFriendStatus();
+        }
+    })
+    event.preventDefault()
+}
+
+function getTimeLine(idUser, idFriend){
+    localStorage.setItem("accountFriend",idFriend);
+    window.open("time-line.html","_blank");
+    event.preventDefault();
+}
+
+function commentInPost(idPost){
+    let idComment = localStorage.getItem("accountId");
+
+    let content = document.getElementById(`commentContent(${idPost})`).value;
+
+    let newComment = {
+        content: content,
+        user: {
+            idUser: idComment
+        }
+    }
+    $.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        type: "POST",
+        data: JSON.stringify(newComment),
+        url: `http://localhost:8080/comment/${idPost}/commentInPost`,
+
+        success: function (){
+            postTimeline();
+            console.log("xong nha")
+        }
+
+    })
+}
+
+function addNewPost(){
+    let data = new FormData();
+    let content = $('#contentPost').val();
+    let status = $('#statusPost').val();
+    let idPost = localStorage.getItem("accountId");
+    let newPost = {
+        content: content,
+        status: status,
+        userPost: {
+            idUser: idPost
+        }
+    }
+    data.append("file", $('#imgFile')[0].files[0]);
+    data.append("json", new Blob([JSON.stringify(newPost)],{
+        type: "application/json"
+    }))
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        processData: false,
+        contentType: false,
+        url: `http://localhost:8080/post/newPost`,
+
+        success: function (){
+            // console.log("Done")
+            window.open("time-line.html", "_self")
+        },
+        error: function (){
+            console.log("sai o dau do")
         }
     })
 }

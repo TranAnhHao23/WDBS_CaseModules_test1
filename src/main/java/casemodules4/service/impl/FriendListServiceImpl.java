@@ -41,18 +41,6 @@ public class FriendListServiceImpl implements IFriendListService {
         return null;
     }
 
-    ;
-
-    @Override
-    public void unFriend(Long userFirstId, Long userSecondId) {
-        User userFrom = userRepository.getById(userFirstId);
-        User userTo = userRepository.getById(userSecondId);
-        String status = checkFriendStatus(userFirstId, userSecondId);
-        if (status != null){
-            friendListRepository.deleteByUserFromAndUserTo(userFrom, userTo);
-        }
-    }
-
     @Override
     public String checkFriendStatus(Long userFirstId, Long userSecondId) {
         String status = null;
@@ -83,44 +71,54 @@ public class FriendListServiceImpl implements IFriendListService {
 
     @Override
     public void acceptFriendRequest(Long userToId, Long userFromId) {
-        String status = checkFriendStatus(userToId, userFromId);
-        if (status.equals("pending"))
+        String status1 = checkFriendStatus(userFromId, userToId);
+        String status2 = checkFriendStatus(userToId, userFromId);
+        if (checkFriendStatus(userFromId, userToId) == null) {
+            status1 = "";
+        }
+        if (checkFriendStatus(userToId, userFromId) == null) {
+            status2 = "";
+        }
+        if (status1.equals("pending")) {
+            friendListRepository.acceptFriendRequest(userFromId, userToId);
+        } else if (status2.equals("pending")) {
             friendListRepository.acceptFriendRequest(userToId, userFromId);
+        }
+
     }
 
     @Override
-    public void blockFriend(Long userFromId, Long userToId) {
-        String status = checkFriendStatus(userFromId, userToId);
-        if (status != null) {
-            friendListRepository.blockFriendRequest(userFromId, userToId);
-        } else {
-            User userFrom = userRepository.getById(userFromId);
-            User userTo = userRepository.getById(userToId);
-            String statusCreate = "block";
-            friendListRepository.save(new FriendList(userFrom, userTo, statusCreate));
+    public void blockFriend(Long idUserFrom, Long idUserTo) {
+        String status1 = checkFriendStatus(idUserFrom, idUserTo);
+        String status2 = checkFriendStatus(idUserTo, idUserFrom);
+        if (status2 != null) {
+            friendListRepository.blockFriendRequest(idUserTo, idUserFrom);
+        } else if (status1 != null){
+            friendListRepository.blockFriendRequest(idUserFrom, idUserTo);
         }
     }
+
     @Override
     public String checkFriendsStatus(Long idUserFrom, Long idUserTo) {
         String status = "non friend";
         String status1 = friendListRepository.checkFriendsStatus(idUserFrom, idUserTo);
         String status2 = friendListRepository.checkFriendsStatus(idUserTo, idUserFrom);
-        if (friendListRepository.checkFriendsStatus(idUserFrom, idUserTo) == null){
+        if (friendListRepository.checkFriendsStatus(idUserFrom, idUserTo) == null) {
             status1 = "";
         }
-        if (friendListRepository.checkFriendsStatus(idUserTo, idUserFrom) == null){
+        if (friendListRepository.checkFriendsStatus(idUserTo, idUserFrom) == null) {
             status2 = "";
         }
 
-        if ((status1.equals("friend")) || (status2.equals("friend"))){
+        if ((status1.equals("friend")) || (status2.equals("friend"))) {
             status = "friend";
-        } else if (status1.equals("pending")){
+        } else if (status1.equals("pending")) {
             status = "pending";
-        } else if (status2.equals("pending")){
+        } else if (status2.equals("pending")) {
             status = "respond";
-        } else if (status1.equals("block")){
+        } else if (status1.equals("block")) {
             status = "block";
-        } else if (status2.equals("block")){
+        } else if (status2.equals("block")) {
             status = "blocked";
         }
         return status;
@@ -129,6 +127,20 @@ public class FriendListServiceImpl implements IFriendListService {
     @Override
     public List<FriendList> findAllPendingByIdUser(Long idUser) {
         return friendListRepository.findAllPendingByIdUser(idUser);
+    }
+
+    @Override
+    public void deleteByUserFrom_IdUserAndUserTo_IdUser(Long idUserFrom, Long idUserTo) {
+        if (checkFriendStatus(idUserFrom, idUserTo) == null) {
+            friendListRepository.deleteByUserFrom_IdUserAndUserTo_IdUser(idUserTo, idUserFrom);
+        } else {
+            friendListRepository.deleteByUserFrom_IdUserAndUserTo_IdUser(idUserFrom, idUserTo);
+        }
+    }
+
+    @Override
+    public void addFriend(Long idUserFrom, Long idUserTo) {
+        friendListRepository.addFriend(idUserFrom, idUserTo);
     }
 
 //    @Override

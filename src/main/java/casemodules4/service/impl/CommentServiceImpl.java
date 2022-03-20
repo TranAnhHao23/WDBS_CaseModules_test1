@@ -18,4 +18,11 @@ public class CommentServiceImpl implements ICommentService {
     public List<Comment> findAllByPostId(Long idPost) {
         return commentRepository.findAllByPostId(idPost);
     }
+
+    @Override
+    public Comment save(Long idPost, Comment comment) {
+        commentRepository.saveCommentInPost(comment.getContent(),comment.getUser().getIdUser(),idPost);
+//        commentRepository.saveCommentInPost(idPost, id);
+        return comment;
+    }
 }

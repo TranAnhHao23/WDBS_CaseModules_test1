@@ -13,8 +13,6 @@ public interface IFriendListService {
 
     FriendList save(FriendList friendList);
 
-    void unFriend(Long userFirstId, Long userSecondId);
-
     void sendFriendRequest(FriendList friendList);
 
     void acceptFriendRequest(Long userFromId, Long userToId);
@@ -23,9 +21,13 @@ public interface IFriendListService {
 
     String checkFriendStatus(Long userFirstId, Long userSecondId);
 
-    List<FriendList> findFriendListByIdUser(@Param("idUser") Long idUser);
+    List<FriendList> findFriendListByIdUser(Long idUser);
 
     String checkFriendsStatus(Long idUserFrom, Long idUserTo);
 
-    List<FriendList> findAllPendingByIdUser(@Param("idUser") Long idUser);
+    List<FriendList> findAllPendingByIdUser(Long idUser);
+
+    void deleteByUserFrom_IdUserAndUserTo_IdUser(Long idUserFrom, Long idUserTo);
+
+    void addFriend(Long idUserFrom, Long idUserTo);
 }

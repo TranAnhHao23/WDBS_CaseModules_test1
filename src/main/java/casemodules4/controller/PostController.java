@@ -7,13 +7,16 @@ import casemodules4.service.IFriendListService;
 import casemodules4.service.IPostService;
 import casemodules4.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 @RestController
 @CrossOrigin("*")
@@ -29,6 +32,12 @@ public class PostController {
 
     @Autowired
     private IUserService userService;
+
+    @Value("${upload.path}")
+    private String fileUpload;
+
+    @Value("${view}")
+    private String view;
 
     @GetMapping
     public ResponseEntity<List<Post>> showAllPost(){
@@ -85,14 +94,18 @@ public class PostController {
             return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
-
-
-    @PostMapping
-    public ResponseEntity<Post> createNewPost(@RequestBody Post post){
-        if (post == null){
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PostMapping("/newPost")
+    public ResponseEntity<Post> createNewPost(@RequestPart("json")Post post, @RequestPart("file")MultipartFile file){
+        String fileName = file.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(file.getBytes(), new File(fileUpload + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return new ResponseEntity<>(post, HttpStatus.OK);
+        post.setImgUrl(view + fileName);
+        postService.save(post);
+
+        return new ResponseEntity<>(post,HttpStatus.OK);
     }
 
     @PutMapping("/{idPost}")

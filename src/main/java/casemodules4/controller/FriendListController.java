@@ -13,6 +13,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/friend-list")
 public class FriendListController {
+
     @Autowired
     private IFriendListService friendListService;
 
@@ -34,30 +35,49 @@ public class FriendListController {
         if (friendList1 == null) {
             new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(friendList,HttpStatus.OK);
-    }
-
-    @GetMapping("delete")
-    public void deleteFriendList(@RequestParam("userFromId")Long userFromId,@RequestParam("userToId")Long userToId){
-        friendListService.unFriend(userFromId, userToId);
+        return new ResponseEntity<>(friendList, HttpStatus.OK);
     }
 
     @GetMapping("/accept")
-    public void acceptFriendRequest(@RequestParam("userFromId")Long userFromId,@RequestParam("userToId")Long userToId){
+    public void acceptFriendRequest(@RequestParam("userFromId") Long userFromId, @RequestParam("userToId") Long userToId) {
         friendListService.acceptFriendRequest(userToId, userFromId);
     }
 
     @GetMapping("/block")
-    public void blockFriendRequest(@RequestParam("userFromId")Long userFromId,@RequestParam("userToId")Long userToId){
+    public void blockFriendRequest(@RequestParam("userFromId") Long userFromId, @RequestParam("userToId") Long userToId) {
         friendListService.blockFriend(userToId, userFromId);
     }
 
     @GetMapping("/{idUserFrom}/{idUserTo}/checkFriendShip")
-    public ResponseEntity<String> getFriendShip(@PathVariable("idUserFrom") Long idUserFrom,@PathVariable("idUserTo") Long idUserTo){
+    public ResponseEntity<String> getFriendShip(@PathVariable("idUserFrom") Long idUserFrom, @PathVariable("idUserTo") Long idUserTo) {
         String status = friendListService.checkFriendsStatus(idUserFrom, idUserTo);
         return new ResponseEntity<>(status, HttpStatus.OK);
     }
 
-//    @GetMapping
+    @GetMapping("/{idUserFrom}/{idUserTo}/acceptFriend")
+    public ResponseEntity<String> acceptFriend(@PathVariable("idUserFrom") Long idUserFrom, @PathVariable("idUserTo") Long idUserTo) {
+        friendListService.acceptFriendRequest(idUserTo, idUserFrom);
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+    @GetMapping("/{idUserFrom}/{idUserTo}/deleteFriendStatus")
+    public ResponseEntity<String> unFriend(@PathVariable("idUserFrom") Long idUserFrom, @PathVariable("idUserTo") Long idUserTo) {
+        friendListService.deleteByUserFrom_IdUserAndUserTo_IdUser(idUserFrom, idUserTo);
+//        friendListService.deleteByUserFrom_IdUserAndUserTo_IdUser(idUserTo, idUserTo);
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+    @GetMapping("/{idUserFrom}/{idUserTo}/blockFriend")
+    public ResponseEntity<String> blockFriend(@PathVariable("idUserFrom") Long idUserFrom, @PathVariable("idUserTo") Long idUserTo) {
+        friendListService.blockFriend(idUserFrom, idUserTo);
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+    @GetMapping("/{idUserFrom}/{idUserTo}/addFriend")
+    public ResponseEntity<String> addFriend(@PathVariable("idUserFrom") Long idUserFrom, @PathVariable("idUserTo") Long idUserTo) {
+        friendListService.addFriend(idUserFrom, idUserTo);
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
 
 }
