@@ -3,6 +3,11 @@ function addUser() {
 
     $.ajax({
         type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/users/find/${idUser}`,
         success: function (user) {
             document.getElementById("imageNavbar").innerHTML = `<img src="${user.imgUrl}" style="width: 32px; height: 32px;border-radius: 100%" alt="">`
@@ -11,7 +16,7 @@ function addUser() {
                                     <i class="fa fa-camera-retro"></i>
                                     <label class="fileContainer">
                                         Edit Display Photo
-                                        <input type="file"/>
+                                        <input type="file" onclick="changeAvatar(${idUser})"/>
                                     </label>
                                 </form>`
             document.getElementById("nameUser").innerHTML = `<h5>${user.fullName}</h5>`
@@ -27,7 +32,7 @@ function getFriendList() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/users/${idUser}/friend-list`,
 
@@ -58,7 +63,7 @@ function getNonFriend() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/users/${idUser}/non-friend-list`,
 
@@ -86,7 +91,7 @@ function postTimeline(){
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/post/${idUserFrom}/${idUserTo}/timeline`,
 
@@ -106,6 +111,11 @@ function postDetail(post) {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/like-post/${post.idPost}/${idUser}/showLike`,
 
         success: function (like) {
@@ -115,6 +125,11 @@ function postDetail(post) {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/comment/${post.idPost}/list-comment`,
 
         success: function (comments) {
@@ -221,6 +236,11 @@ function likePost(idPost) {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/like-post/${idPost}/${idUser}/checkLike`,
 
         success: function (like) {
@@ -236,6 +256,11 @@ function checkFriendStatus(){
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/checkFriendShip`,
 
         success: function (status){
@@ -274,6 +299,11 @@ function checkFriendStatus(){
 function acceptFriend(idUserFrom, idUserTo){
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/acceptFriend`,
 
         success: function () {
@@ -288,6 +318,11 @@ function acceptFriend(idUserFrom, idUserTo){
 function unFriend(idUserFrom, idUserTo){
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/deleteFriendStatus`,
 
         success: function () {
@@ -302,6 +337,11 @@ function unFriend(idUserFrom, idUserTo){
 function cancelFriend(idUserFrom, idUserTo){
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/deleteFriendStatus`,
 
         success: function () {
@@ -316,6 +356,11 @@ function cancelFriend(idUserFrom, idUserTo){
 function blockFriend(idUserFrom, idUserTo){
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/blockFriend`,
 
         success: function () {
@@ -330,6 +375,11 @@ function blockFriend(idUserFrom, idUserTo){
 function unBlockFriend(idUserFrom, idUserTo){
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/deleteFriendStatus`,
 
         success: function () {
@@ -344,6 +394,11 @@ function unBlockFriend(idUserFrom, idUserTo){
 function addFriend(idUserFrom, idUserTo){
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/addFriend`,
 
         success: function () {
@@ -375,7 +430,8 @@ function commentInPost(idPost){
     $.ajax({
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         type: "POST",
         data: JSON.stringify(newComment),
@@ -412,6 +468,27 @@ function addNewPost(){
         processData: false,
         contentType: false,
         url: `http://localhost:8080/post/newPost`,
+
+        success: function (){
+            // console.log("Done")
+            window.open("time-line.html", "_self")
+        },
+        error: function (){
+            console.log("sai o dau do")
+        }
+    })
+}
+
+function changeAvatar(idUser){
+    let data = new FormData();
+    data.append("file", $('#imgFile')[0].files[0]);
+
+    $.ajax({
+        type: "GET",
+        data: data,
+        processData: false,
+        contentType: false,
+        url: `http://localhost:8080/user/${idUser}/changeAvatar`,
 
         success: function (){
             // console.log("Done")

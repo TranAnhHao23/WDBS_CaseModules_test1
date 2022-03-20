@@ -3,6 +3,11 @@ function addUser() {
 
     $.ajax({
         type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/users/find/${idUser}`,
         success: function (user) {
             document.getElementById("imageNavbar").innerHTML = `<img src="${user.imgUrl}" style="width: 32px; height: 32px;border-radius: 100%" alt="">`
@@ -25,6 +30,11 @@ function getGroup() {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/group/${idGroup}`,
 
         success: function (group) {
@@ -48,6 +58,11 @@ function getMembers() {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/group/${idGroup}/member`,
 
         success: function (users) {
@@ -75,6 +90,11 @@ function getNonMembers() {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/group/${idGroup}/notMember`,
 
         success: function (users) {
@@ -99,6 +119,11 @@ function getTotalMembers() {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/group/${idGroup}/totalMembers`,
 
         success: function (total) {
@@ -116,7 +141,7 @@ function getPostInGroup() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/group/${idGroup}/posts`,
 
@@ -136,6 +161,11 @@ function postDetail(post) {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/like-post/${post.idPost}/${idUser}/showLike`,
 
         success: function (like) {
@@ -145,6 +175,11 @@ function postDetail(post) {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/comment/${post.idPost}/list-comment`,
 
         success: function (comments) {
@@ -251,6 +286,11 @@ function likePost(idPost) {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/like-post/${idPost}/${idUser}/checkLike`,
 
         success: function (like) {
@@ -274,7 +314,8 @@ function commentInPost(idPost){
     $.ajax({
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         type: "POST",
         data: JSON.stringify(newComment),
@@ -324,6 +365,73 @@ function addNewPost(){
     })
 }
 
+function statusOnGroup(){
+    let idUser = localStorage.getItem("accountId")
+    let idGroup = localStorage.getItem("groupId")
+
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        url: `http://localhost:8080/group/${idGroup}/member`,
+
+        success: function (users) {
+            let status = false
+            for (let i = 0; i < users.length; i++) {
+                console.log(users[i].idUser)
+                if (users[i].idUser == idUser){
+                    status = true;
+                    break;
+                }
+            }
+            console.log(idUser)
+            console.log(status)
+            if (status === true){
+                document.getElementById("statusInGroup").innerHTML = `<a href="#" title="" data-ripple="" onclick="leaveGroup(${idGroup}, ${idUser})">LEAVE GROUP</a>`
+            } else {
+                document.getElementById("statusInGroup").innerHTML = `<a href="#" title="" data-ripple="" onclick="joinGroup(${idGroup}, ${idUser})">JOIN GROUP</a>`
+            }
+        }
+    })
+}
+
+function leaveGroup(idGroup, idUser){
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        url: `http://localhost:8080/group/${idGroup}/${idUser}/leave`,
+
+        success: function (){
+            window.open("fav-page.html", "_self")
+        }
+    })
+    event.preventDefault()
+}
+
+function joinGroup(idGroup, idUser){
+    $.ajax({
+        type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        url: `http://localhost:8080/group/${idGroup}/${idUser}/join`,
+
+        success: function (){
+            window.open("fav-page.html", "_self")
+        }
+    })
+    event.preventDefault()
+}
+
 
 window.onload = function () {
     addUser()
@@ -332,4 +440,5 @@ window.onload = function () {
     getMembers()
     getNonMembers()
     getPostInGroup()
+    statusOnGroup()
 }

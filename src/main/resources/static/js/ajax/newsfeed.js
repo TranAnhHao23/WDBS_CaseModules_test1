@@ -3,6 +3,11 @@ function addUser() {
 
     $.ajax({
         type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/users/find/${idUser}`,
         success: function (user) {
             document.getElementById("imageNavbar").innerHTML = `<img src="${user.imgUrl}" style="width: 32px; height: 32px;border-radius: 100%" alt="">`
@@ -45,6 +50,11 @@ function postDetail(post) {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/like-post/${post.idPost}/${idUser}/showLike`,
 
         success: function (like) {
@@ -159,6 +169,11 @@ function likePost(idPost) {
 
     $.ajax({
         type: "GET",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/like-post/${idPost}/${idUser}/checkLike`,
 
         success: function (like) {
@@ -175,7 +190,7 @@ function getFriendList() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/users/${idUser}/friend-list`,
 
@@ -206,7 +221,7 @@ function getNonFriend() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/users/${idUser}/non-friend-list`,
 
@@ -293,7 +308,8 @@ function commentInPost(idPost){
     $.ajax({
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         type: "POST",
         data: JSON.stringify(newComment),

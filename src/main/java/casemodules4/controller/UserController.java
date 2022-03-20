@@ -38,6 +38,11 @@ public class UserController {
     @Value("${upload.path}")
     private String fileUpload;
 
+    @Value("${view}")
+    private String view;
+
+
+
 
 //    @GetMapping("/{idUser}")
 //    public ModelAndView showAll(@PathVariable("idUser") Long idUser){
@@ -142,6 +147,23 @@ public class UserController {
             users.add(friendList.getUserFrom());
         }
         return new ResponseEntity<>(users,HttpStatus.OK);
+    }
+
+    @GetMapping("/{idUser}/changeAvatar")
+    public ResponseEntity<User> changeAvatar(@PathVariable("idUser") Long id, @RequestBody MultipartFile data){
+        User user = userService.findById(id);
+
+        String fileName = data.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(data.getBytes(), new File(fileUpload + fileName));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        user.setImgUrl(view + fileName);
+        userService.save(user);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     public List<User> getListFriendList(Long idUser) {

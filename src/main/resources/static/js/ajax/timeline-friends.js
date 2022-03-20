@@ -3,6 +3,11 @@ function addUser() {
 
     $.ajax({
         type: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
         url: `http://localhost:8080/users/find/${idUser}`,
         success: function (user) {
             document.getElementById("imageNavbar").innerHTML = `<img src="${user.imgUrl}" style="width: 32px; height: 32px;border-radius: 100%" alt="">`
@@ -27,7 +32,7 @@ function getFriendList() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/users/${idUser}/friend-list`,
 
@@ -95,7 +100,7 @@ function getNonFriend() {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/users/${idUser}/non-friend-list`,
 
@@ -125,7 +130,7 @@ function getFriendRequest(){
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         url: `http://localhost:8080/users/${idUser}/pending`,
         
