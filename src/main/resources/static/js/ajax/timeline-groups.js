@@ -98,11 +98,11 @@ function getJoinedGroup() {
                     content += `<li>
                                 <div class="nearly-pepls">
                                     <figure>
-                                        <a href="fav-page.html" title=""><img src="${groups[i].imgUrl}" alt=""></a>
+                                        <a href="#" onclick="moveToGroup(${groups[i].idGroup})" title=""><img src="${groups[i].imgUrl}" style="width: 60px; height: 60px; border-radius: 100%" alt=""></a>
                                     </figure>
                                     <div class="pepl-info">
                                         <h4>
-                                            <a href="fav-page.html" title="">${groups[i].name}</a>
+                                            <a href="#" onclick="moveToGroup(${groups[i].idGroup})" title="">${groups[i].name}</a>
                                         </h4>
                                         <span>public group</span>
                                         <a href="#" title="" onclick="leaveGroup(${groups[i].idGroup},${idUser})" class="add-butn" data-ripple="">leave group</a>
@@ -131,6 +131,12 @@ function getJoinedGroup() {
             document.getElementById("list-group-joined").innerHTML = content;
         }
     })
+}
+
+function moveToGroup(idGroup){
+    localStorage.setItem("groupId", idGroup);
+    window.open("fav-page.html","_blank");
+    event.preventDefault();
 }
 
 function leaveGroup(idGroup, idUser){
