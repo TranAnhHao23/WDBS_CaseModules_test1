@@ -17,6 +17,8 @@ public interface IGroupMembersRepository extends JpaRepository<GroupMembers, Lon
 
     List<GroupMembers> findAllById_IdGroup(Long idGroup);
 
+    GroupMembers findAllById_IdGroupAndId_IdUser(Long idGroup, Long idUser);
+
     @Modifying
     @Query(value = "INSERT INTO group_members (id_group, id_user, role) VALUES (:idGroup, :idUser, 'user')", nativeQuery = true)
     void addToGroup(@Param("idGroup") Long idGroup, @Param("idUser") Long idUser);

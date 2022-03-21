@@ -108,6 +108,16 @@ public class GroupController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
+        @GetMapping("/{idGroup}/{idUser}/checkMember")
+    public ResponseEntity<String> checkMember(@PathVariable("idGroup") Long idGroup, @PathVariable("idUser") Long idUser){
+        GroupMembers groupMembers = groupService.findAllById_IdGroupAndId_IdUser(idGroup, idUser);
+        String status = "not a member";
+        if (groupMembers != null){
+            status = "member";
+        }
+        return new ResponseEntity<>(status, HttpStatus.OK);
+    }
+
 //    @GetMapping("/id")
 
 }

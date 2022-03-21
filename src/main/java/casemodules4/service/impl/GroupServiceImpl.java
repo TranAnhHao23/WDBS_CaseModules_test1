@@ -67,4 +67,9 @@ public class GroupServiceImpl implements IGroupService {
     public void createNewPostInGroup(Long idGroup, Long idPost) {
         groupRepository.createNewPostInGroup(idGroup, idPost);
     }
+
+    @Override
+    public GroupMembers findAllById_IdGroupAndId_IdUser(Long idGroup, Long idUser) {
+        return groupMembersRepository.findAllById_IdGroupAndId_IdUser(idGroup, idUser);
+    }
 }

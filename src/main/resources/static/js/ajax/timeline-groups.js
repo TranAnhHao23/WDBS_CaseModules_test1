@@ -89,11 +89,11 @@ function getJoinedGroup() {
 
     $.ajax({
         type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        },
+        // headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json',
+        //     'Authorization': 'Bearer ' + localStorage.getItem('token')
+        // },
         url: `http://localhost:8080/group/${idUser}/list-group`,
 
         success: function (groups) {
@@ -147,11 +147,11 @@ function moveToGroup(idGroup){
 function leaveGroup(idGroup, idUser){
     $.ajax({
         type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        },
+        // headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json',
+        //     'Authorization': 'Bearer ' + localStorage.getItem('token')
+        // },
         url: `http://localhost:8080/group/${idGroup}/${idUser}/leave`,
 
         success: function (){

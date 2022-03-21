@@ -256,11 +256,11 @@ function checkFriendStatus(){
 
     $.ajax({
         type: "GET",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        },
+        // headers: {
+        //     'Accept': 'application/json',
+        //     'Content-Type': 'application/json',
+        //     'Authorization': 'Bearer ' + localStorage.getItem('token')
+        // },
         url: `http://localhost:8080/friend-list/${idUserFrom}/${idUserTo}/checkFriendShip`,
 
         success: function (status){

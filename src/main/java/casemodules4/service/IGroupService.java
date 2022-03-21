@@ -27,5 +27,7 @@ public interface IGroupService {
 
     void createNewPostInGroup(Long idGroup, Long idPost);
 
+    GroupMembers findAllById_IdGroupAndId_IdUser(Long idGroup, Long idUser);
+
 
 }
